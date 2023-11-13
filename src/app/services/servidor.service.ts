@@ -18,19 +18,19 @@ export class ServidorService {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
   };
 
-  addClient(data: any){
+  addServidor(data: any){
     return this.http.post(this.url+'/api/v1/servidor', data, this.httpOptions)
   }
 
-  findClient(id: any){
+  findServidor(id: any){
     return this.http.get(this.url+'/api/v1/servidor/'+id)
   }
 
-  editClient(data:any, id:any){
+  editServidor(data:any, id:any){
     return this.http.put(this.url+'/api/v1/servidor/'+id,  data, this.httpOptions)
   }
 
-  deleteClient(id: any){
+  deleteServidor(id: any){
     return this.http.delete(this.url+'/api/v1/servidor/'+id)
   }
 
