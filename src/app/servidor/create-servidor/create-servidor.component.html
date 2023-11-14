@@ -1,0 +1,24 @@
+<div>
+    <h1>Agregar datos</h1>
+    <form [formGroup]="serverForm" (ngSubmit)="onSubmit()">
+        <div class="mb-3">
+            <label for="nombre" class="form-label">Nombre</label>
+            <input type="text" class="form-control" id="nombre" formControlName="nombre">
+        </div>
+        <div class="mb-3">
+            <label for="direccionIP" class="form-label">Dirección IP</label>
+            <input type="text" class="form-control" id="direccionIP" formControlName="direccionIP" placeholder="172.0.0.0">
+        </div>
+        <div class="mb-3">
+            <label for="SO" class="form-label">Sistema operativo</label>
+            <input type="text" class="form-control" id="SO" formControlName="SO">
+        </div>
+        <div class="mb-3">
+            <label for="motorBase" class="form-label">Motor de base</label>
+            <input type="text" class="form-control" id="motorBase" formControlName="motorBase">
+        </div>
+        <div class="mb-3">
+            <button type="submit" class="btn btn-primary">Guardar datos</button>
+        </div>
+    </form>
+</div>
