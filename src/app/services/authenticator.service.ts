@@ -33,5 +33,15 @@ export class AuthenticatorService {
   isLoggedIn(){
     return localStorage.getItem('token')!=null;
   }
-}
 
+  getHttpOptions() {
+    const token = localStorage.getItem('token');
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`
+      })
+    };
+    return httpOptions;
+  }
+}

@@ -29,8 +29,8 @@ export class SignInComponent {
         result =>{
           if(result != null){
             this.responseData = result;
-            localStorage.setItem('token',this.responseData.jwtToken)
-            this.router.navigate(['list/client']);
+            localStorage.setItem('token',this.responseData)
+            this.router.navigate(['list/server']);
           }
         }
       );
