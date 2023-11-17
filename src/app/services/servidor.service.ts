@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { AuthenticatorService } from './authenticator.service';
 
 @Injectable({
   providedIn: 'root'
@@ -8,18 +9,18 @@ import { Observable } from 'rxjs';
 export class ServidorService {
 
   url:string = "http://127.0.0.1:3000";
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private authService: AuthenticatorService) { }
 
   listServidores(){
     return this.http.get(this.url+'/api/v1/servidor');
   }
 
   httpOptions = {
-    headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+    headers: new HttpHeaders({ 'Content-Type': 'application/json'})
   };
 
   addServidor(data: any){
-    return this.http.post(this.url+'/api/v1/servidor', data, this.httpOptions)
+    return this.http.post(this.url+'/api/v1/servidor', data, this.authService.getHttpOptions())
   }
 
   findServidor(id: any){
@@ -27,11 +28,11 @@ export class ServidorService {
   }
 
   editServidor(data:any, id:any){
-    return this.http.put(this.url+'/api/v1/servidor/'+id,  data, this.httpOptions)
+    return this.http.put(this.url+'/api/v1/servidor/'+id,  data, this.authService.getHttpOptions())
   }
 
   deleteServidor(id: any){
-    return this.http.delete(this.url+'/api/v1/servidor/'+id)
+    return this.http.delete(this.url+'/api/v1/servidor/'+id, this.authService.getHttpOptions())
   }
 
   /** 
