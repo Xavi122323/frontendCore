@@ -10,6 +10,8 @@ import { CreateServidorComponent } from './servidor/create-servidor/create-servi
 import { EditServidorComponent } from './servidor/edit-servidor/edit-servidor.component';
 import { SignInComponent } from './auth/sign-in/sign-in.component';
 import { RegisterComponent } from './auth/register/register.component';
+import { ListUsersComponent } from './admin_role/list-users/list-users.component';
+import { UpdateUserComponent } from './admin_role/update-user/update-user.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +20,9 @@ import { RegisterComponent } from './auth/register/register.component';
     CreateServidorComponent,
     EditServidorComponent,
     SignInComponent,
-    RegisterComponent
+    RegisterComponent,
+    ListUsersComponent,
+    UpdateUserComponent
   ],
   imports: [
     BrowserModule,
