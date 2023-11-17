@@ -8,7 +8,8 @@ import { AuthenticatorService } from './authenticator.service';
 })
 export class ServidorService {
 
-  url:string = "http://127.0.0.1:3000";
+  //url:string = "http://127.0.0.1:3000";
+  url:string = "https://corebackend.onrender.com";
   constructor(private http: HttpClient, private authService: AuthenticatorService) { }
 
   listServidores(){
