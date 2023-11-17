@@ -30,7 +30,6 @@ export class SignInComponent {
           if(result != null){
             this.responseData = result;
             localStorage.setItem('token',this.responseData)
-            console.log('Token:', localStorage.getItem('token'));
             this.router.navigate(['list/server']);
           }
         }
