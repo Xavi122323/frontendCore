@@ -1,6 +1,8 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatButtonModule } from '@angular/material/button';
 
 import { AppRoutingModule } from './app-routing.module';
 import { ReactiveFormsModule, FormsModule} from '@angular/forms';
@@ -12,6 +14,8 @@ import { SignInComponent } from './auth/sign-in/sign-in.component';
 import { RegisterComponent } from './auth/register/register.component';
 import { ListUsersComponent } from './admin_role/list-users/list-users.component';
 import { UpdateUserComponent } from './admin_role/update-user/update-user.component';
+import { NavbarComponent } from './navbar/navbar.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -22,14 +26,18 @@ import { UpdateUserComponent } from './admin_role/update-user/update-user.compon
     SignInComponent,
     RegisterComponent,
     ListUsersComponent,
-    UpdateUserComponent
+    UpdateUserComponent,
+    NavbarComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
     ReactiveFormsModule,
-    FormsModule
+    FormsModule,
+    BrowserAnimationsModule,
+    MatToolbarModule,
+    MatButtonModule
   ],
   providers: [],
   bootstrap: [AppComponent]

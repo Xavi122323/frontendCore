@@ -12,7 +12,7 @@ export class AdminRoleService {
   constructor(private http: HttpClient,private authService: AuthenticatorService) { }
 
   listUsers(){
-    return this.http.get(this.url+'/api/v1/admin_role');
+    return this.http.get(this.url+'/api/v1/admin_role', this.authService.getHttpOptions());
   }
 
   findUser(id: any){

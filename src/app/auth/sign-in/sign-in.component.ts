@@ -1,16 +1,17 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { AuthenticatorService } from 'src/app/services/authenticator.service';
 import { Router } from '@angular/router';
+import { NavbarService } from 'src/app/services/navbar.service';
 
 @Component({
   selector: 'app-sign-in',
   templateUrl: './sign-in.component.html',
   styleUrls: ['./sign-in.component.scss']
 })
-export class SignInComponent {
+export class SignInComponent implements OnInit, OnDestroy{
 
-  constructor(private authenticatorService: AuthenticatorService, private router: Router)
+  constructor(private authenticatorService: AuthenticatorService, private router: Router, private navbarService: NavbarService)
   {
     localStorage.clear();
   }
@@ -38,6 +39,15 @@ export class SignInComponent {
 
   registerRoute(){
     this.router.navigate(['register/user']);
+  }
+
+  ngOnInit(): void {
+      this.navbarService.hide();
+      localStorage.removeItem('token');
+  }
+
+  ngOnDestroy(): void {
+      this.navbarService.display();
   }
 
 }
