@@ -1,1 +1,16 @@
-<p>update-user works!</p>
+<div>
+    <h1>Editar datos</h1>
+    <form *ngIf="userForm" [formGroup]="userForm" (ngSubmit)="onSubmit()">
+        <div class="mb-3">
+            <label for="email" class="form-label">Email</label>
+            <input type="text" class="form-control" id="email" formControlName="email">
+        </div>
+        <div class="mb-3">
+            <label for="role" class="form-label">Role</label>
+            <input type="text" class="form-control" id="role" formControlName="role">
+        </div>
+        <div class="mb-3">
+            <button type="submit" class="btn btn-primary">Guardar datos</button>
+        </div>
+    </form>
+</div>

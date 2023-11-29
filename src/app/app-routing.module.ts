@@ -5,6 +5,9 @@ import { CreateServidorComponent } from './servidor/create-servidor/create-servi
 import { EditServidorComponent } from './servidor/edit-servidor/edit-servidor.component';
 import { SignInComponent } from './auth/sign-in/sign-in.component';
 import { RegisterComponent } from './auth/register/register.component';
+import { AuthenticatorService } from './services/authenticator.service';
+import { ListUsersComponent } from './admin_role/list-users/list-users.component';
+import { UpdateUserComponent } from './admin_role/update-user/update-user.component';
 
 const routes: Routes = [
   {
@@ -21,6 +24,12 @@ const routes: Routes = [
   },
   {
     path:'edit/server/:serverID', component:EditServidorComponent
+  },
+  {
+    path:'list/user', component:ListUsersComponent
+  },
+  {
+    path:'edit/user/:userID', component:UpdateUserComponent
   }
 ];
 
