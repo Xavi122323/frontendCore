@@ -8,8 +8,8 @@ import { AuthenticatorService } from './authenticator.service';
 })
 export class ServidorService {
 
-  //url:string = "http://127.0.0.1:3000";
-  url:string = "https://corebackend.onrender.com";
+  url:string = "http://127.0.0.1:3000";
+  //url:string = "https://corebackend.onrender.com";
   constructor(private http: HttpClient, private authService: AuthenticatorService) { }
 
   listServidores(){
@@ -36,13 +36,4 @@ export class ServidorService {
     return this.http.delete(this.url+'/api/v1/servidor/'+id, this.authService.getHttpOptions())
   }
 
-  /** 
-  login(data: any){
-    return this.http.post(this.url+'/api/v1/users', {user: data}, this.httpOptions);
-  }
-
-  register(data: any){
-    return this.http.post(this.url+'/api/v1/users', {user: data}, this.httpOptions)
-  }
-  */
 }

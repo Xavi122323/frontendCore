@@ -1,0 +1,18 @@
+<h1>Lista de usuarios</h1>
+<table class="table">
+    <thead>
+      <tr>
+        <th scope="col">email</th>
+        <th scope="col">rol</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let users of user">
+        <td>{{users.email}}</td>
+        <td>{{users.role}}</td>
+        <td><button class="btn btn-success" (click)="editUser(users.id)">Editar</button> | <button class="btn btn-danger" (click)="deleteUser(users.id)">Eliminar</button></td>
+      </tr>
+    </tbody>
+</table>
+
+

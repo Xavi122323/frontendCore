@@ -1,6 +1,8 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatButtonModule } from '@angular/material/button';
 
 import { AppRoutingModule } from './app-routing.module';
 import { ReactiveFormsModule, FormsModule} from '@angular/forms';
@@ -10,6 +12,10 @@ import { CreateServidorComponent } from './servidor/create-servidor/create-servi
 import { EditServidorComponent } from './servidor/edit-servidor/edit-servidor.component';
 import { SignInComponent } from './auth/sign-in/sign-in.component';
 import { RegisterComponent } from './auth/register/register.component';
+import { ListUsersComponent } from './admin_role/list-users/list-users.component';
+import { UpdateUserComponent } from './admin_role/update-user/update-user.component';
+import { NavbarComponent } from './navbar/navbar.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -18,14 +24,20 @@ import { RegisterComponent } from './auth/register/register.component';
     CreateServidorComponent,
     EditServidorComponent,
     SignInComponent,
-    RegisterComponent
+    RegisterComponent,
+    ListUsersComponent,
+    UpdateUserComponent,
+    NavbarComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
     ReactiveFormsModule,
-    FormsModule
+    FormsModule,
+    BrowserAnimationsModule,
+    MatToolbarModule,
+    MatButtonModule
   ],
   providers: [],
   bootstrap: [AppComponent]
