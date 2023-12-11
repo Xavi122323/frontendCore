@@ -16,6 +16,9 @@ import { ListUsersComponent } from './admin_role/list-users/list-users.component
 import { UpdateUserComponent } from './admin_role/update-user/update-user.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ListComponenteComponent } from './componente/list-componente/list-componente.component';
+import { CreateComponenteComponent } from './componente/create-componente/create-componente.component';
+import { UpdateComponenteComponent } from './componente/update-componente/update-componente.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +30,10 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     RegisterComponent,
     ListUsersComponent,
     UpdateUserComponent,
-    NavbarComponent
+    NavbarComponent,
+    ListComponenteComponent,
+    CreateComponenteComponent,
+    UpdateComponenteComponent
   ],
   imports: [
     BrowserModule,

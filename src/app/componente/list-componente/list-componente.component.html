@@ -1,0 +1,21 @@
+<h1>Lista de Componentes</h1>
+<table class="table">
+    <thead>
+      <tr>
+        <th scope="col">Nro CPU</th>
+        <th scope="col">Memoria</th>
+        <th scope="col">Almacenamiento</th>
+        <th scope="col">Servidor</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let component of componente">
+        <td>{{component.nroCPU}}</td>
+        <td>{{component.memoria}}</td>
+        <td>{{component.almacenamiento}}</td>
+        <td>{{component.server_name}}</td>
+        <td><button class="btn btn-success" (click)="editComponente(component.id)">Editar</button> | <button class="btn btn-danger" (click)="deleteComponente(component.id)">Eliminar</button></td>
+      </tr>
+    </tbody>
+</table>
+<button class="btn btn-info" (click)="createComponente()">Agregar componente</button>

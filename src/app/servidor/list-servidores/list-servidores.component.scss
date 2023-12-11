@@ -4,12 +4,34 @@ $panda-black: #2a2a2a;
 $panda-white: #ffffff;
 $panda-grey-light: #f2f2f2;
 $panda-grey-dark: #333333;
-
 $success-green: #4caf50;
 $info-blue: #2196f3;
 $danger-red: #f44336;
 
-// Apply styles to the page
+// Mixins
+@mixin button-style($bg-color, $text-color: $white) {
+  background-color: $bg-color;
+  color: $text-color;
+  padding: 4px 8px; // Reduced padding
+  margin: 0 2px; // Reduced margin
+  cursor: pointer;
+  border: none;
+  border-radius: 4px;
+  font-size: 14px;
+  transition: background-color 0.3s, transform 0.3s;
+
+  &:hover, &:focus {
+    background-color: darken($bg-color, 10%);
+    transform: translateY(-2px);
+  }
+
+  &:focus {
+    outline: none;
+    box-shadow: 0 0 0 2px lighten($bg-color, 40%);
+  }
+}
+
+// Global Styles
 body {
   background-color: $panda-white;
   font-family: Arial, sans-serif;
@@ -20,10 +42,13 @@ h1 {
   text-align: center;
 }
 
+// Table Styles
 .table {
-  width: 80%;
-  margin: 0 auto; // Center the table using flexbox
+  width: 100%;
+  max-width: 960px;
+  margin: 20px auto;
   border-collapse: collapse;
+  table-layout: fixed; // Use fixed layout for equal distribution
 
   thead {
     background-color: $panda-grey-dark;
@@ -31,42 +56,86 @@ h1 {
   }
 
   th, td {
-    border: 1px solid $panda-grey-light;
     padding: 10px;
     text-align: left;
+    border: 1px solid $panda-grey-light;
+  }
+
+  th {
+    &:last-child {
+      width: 25%; // Assign more space for action buttons if needed
+    }
   }
 
   tbody {
-    tr:nth-child(odd) {
-      background-color: $panda-grey-light;
+    tr {
+      &:nth-child(odd) {
+        background-color: $panda-grey-light;
+      }
+      &:nth-child(even) {
+        background-color: $panda-white;
+      }
     }
-
-    tr:nth-child(even) {
-      background-color: $panda-white;
+    td {
+      &:nth-child(-n+3) { // Assuming first three columns are numerical
+        text-align: right;
+      }
     }
   }
 }
 
-button {
-    padding: 8px 12px;
-    margin: 5px;
-    cursor: pointer;
-    border: none;
-    border-radius: 4px;
-    font-size: 14px;
+// Button Styles
+.btn {
+  @include button-style($panda-black); // Default button style
+
+  &-success {
+    @include button-style($success-green);
   }
 
-  .btn-success {
-    background-color: $success-green;
-    color: $white;
+  &-danger {
+    @include button-style($danger-red);
   }
 
-  .btn-danger {
-    background-color: $danger-red;
-    color: $white;
+  &-info {
+    @include button-style($info-blue);
   }
 
-  .btn-info {
-    background-color: $info-blue;
-    color: $white;
+  // Icon Buttons (if you choose to use icons)
+  &-edit, &-delete {
+    @include button-style($panda-grey-dark); // Style for edit/delete buttons
+    font-size: 12px; // Smaller font size for text in buttons
   }
+}
+
+// Additional Styles
+.add-button {
+  background-color: $info-blue;
+  color: $white;
+  padding: 10px 15px;
+  margin: 10px 0;
+  border: none;
+  border-radius: 4px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+
+  &:hover {
+    background-color: darken($info-blue, 10%);
+  }
+}
+
+// Responsive Design
+@media only screen and (max-width: 768px) {
+  .table {
+    width: 100%;
+    max-width: none;
+  }
+
+  th, td {
+    padding: 8px; // Smaller padding on mobile
+  }
+
+  .btn {
+    padding: 4px 6px; // Smaller buttons on mobile
+  }
+}
