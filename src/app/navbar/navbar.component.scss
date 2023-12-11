@@ -1,27 +1,55 @@
+// Define color palette
 $white: #fff;
-$black: #000;
 $primary-blue: #2196f3;
+$hover-blue: lighten($primary-blue, 10%);
 
+// Mixins
+@mixin link-style {
+  color: $white;
+  text-decoration: none;
+  margin: 0 16px; // consistent margin for all links
+  padding: 8px 16px; // padding for larger clickable area
+  font-size: 16px;
+  transition: background-color 0.3s, color 0.3s;
+
+  &:hover, &:focus {
+    background-color: darken($primary-blue, 10%);
+    text-decoration: none; // no underline on hover, use color change instead
+  }
+}
+
+// Navbar Styles
 mat-toolbar {
   background-color: $primary-blue;
   color: $white;
   display: flex;
-  justify-content: space-between;
+  justify-content: space-between; // this will keep the logo on the left and nav items on the right
   align-items: center;
   padding: 0 16px;
 
-  .spacer {
-    flex-grow: 1;
+  // Logo or title style
+  &:first-child {
+    font-weight: bold;
+    font-size: 20px;
   }
 
-  a {
-    color: $white;
-    text-decoration: none;
-    margin-left: 16px;
-    font-size: 16px;
+  .spacer {
+    flex-grow: 1; // this will push the nav items to the right
+  }
 
-    &:hover {
-      text-decoration: underline;
+  a[mat-button] {
+    @include link-style; // apply the mixin to mat-button styled links
+  }
+}
+
+// Responsive Design
+@media (max-width: 768px) {
+  mat-toolbar {
+    padding: 0 8px;
+    a[mat-button] {
+      margin: 0 8px;
+      padding: 8px 8px;
+      font-size: 14px;
     }
   }
 }
