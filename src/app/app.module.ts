@@ -19,9 +19,10 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ListComponenteComponent } from './componente/list-componente/list-componente.component';
 import { CreateComponenteComponent } from './componente/create-componente/create-componente.component';
 import { UpdateComponenteComponent } from './componente/update-componente/update-componente.component';
-import { ListDatabaseComponent } from './database/list-database/list-database.component';
-import { CreateDatabaseComponent } from './database/create-database/create-database.component';
-import { UpdateDatabaseComponent } from './database/update-database/update-database.component';
+import { ListDatabaseComponent } from './bd/list-database/list-database.component';
+import { CreateDatabaseComponent } from './bd/create-database/create-database.component';
+import { UpdateDatabaseComponent } from './bd/update-database/update-database.component';
+
 
 @NgModule({
   declarations: [
