@@ -15,6 +15,9 @@ import { UpdateComponenteComponent } from './componente/update-componente/update
 import { ListDatabaseComponent } from './bd/list-database/list-database.component';
 import { CreateDatabaseComponent } from './bd/create-database/create-database.component';
 import { UpdateDatabaseComponent } from './bd/update-database/update-database.component';
+import { ListMetricaComponent } from './metrica/list-metrica/list-metrica.component';
+import { CreateMetricaComponent } from './metrica/create-metrica/create-metrica.component';
+import { UpdateMetricaComponent } from './metrica/update-metrica/update-metrica.component';
 
 const routes: Routes = [
   {path:'', component:SignInComponent},
@@ -29,7 +32,10 @@ const routes: Routes = [
   {path:'edit/componente/:componenteID', component:UpdateComponenteComponent, canActivate:[AuthGuard]},
   {path:'list/database', component:ListDatabaseComponent, canActivate:[AuthGuard]},
   {path:'create/database', component:CreateDatabaseComponent, canActivate:[AuthGuard]},
-  {path:'edit/database/:databaseID', component:UpdateDatabaseComponent, canActivate:[AuthGuard]}
+  {path:'edit/database/:databaseID', component:UpdateDatabaseComponent, canActivate:[AuthGuard]},
+  {path:'list/metrica', component:ListMetricaComponent, canActivate:[AuthGuard]},
+  {path:'create/metrica', component:CreateMetricaComponent, canActivate:[AuthGuard]},
+  {path:'edit/metrica/:metricaID', component:UpdateMetricaComponent, canActivate:[AuthGuard]}
 ];
 
 @NgModule({

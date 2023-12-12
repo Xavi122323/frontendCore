@@ -1,9 +1,39 @@
 import { Injectable } from '@angular/core';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Observable } from 'rxjs';
+import { AuthenticatorService } from './authenticator.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class MetricaService {
 
-  constructor() { }
+  url:string = "http://127.0.0.1:3000";
+  //url:string = "https://corebackend.onrender.com";
+
+  constructor(private http: HttpClient, private authService: AuthenticatorService) { }
+
+  httpOptions = {
+    headers: new HttpHeaders({ 'Content-Type': 'application/json'})
+  };
+
+  listMetricas(): Observable<any> {
+    return this.http.get(this.url+'/api/v1/metrica', this.authService.getHttpOptions());
+  }
+
+  addMetrica(data: any): Observable<any>{
+    return this.http.post(this.url+'/api/v1/metrica', data, this.authService.getHttpOptions())
+  }
+
+  findMetrica(id: any): Observable<any>{
+    return this.http.get(this.url+'/api/v1/metrica/'+id)
+  }
+
+  editMetrica(data: any, id: any): Observable<any>{
+    return this.http.put(this.url+'/api/v1/metrica/'+id, data, this.authService.getHttpOptions())
+  }
+
+  deleteMetrica(id: any){
+    return this.http.delete(this.url+'/api/v1/metrica/'+id, this.authService.getHttpOptions())
+  }
 }

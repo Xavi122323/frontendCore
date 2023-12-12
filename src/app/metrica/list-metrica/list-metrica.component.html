@@ -1,1 +1,23 @@
-<p>list-metrica works!</p>
+<h1>Lista de metricas</h1>
+<table class="table">
+    <thead>
+      <tr>
+        <th scope="col">Uso de CPU</th>
+        <th scope="col">Uso de Memoria</th>
+        <th scope="col">Uso de Almacenamiento</th>
+        <th scope="col">Fecha de recoleccion</th>
+        <th scope="col">Servidor</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let metrica of metricas">
+        <td>{{metrica.usoCPU}}</td>
+        <td>{{metrica.usoMemoria}}</td>
+        <td>{{metrica.usoAlmacenamiento}}</td>
+        <td>{{metrica.fechaRecoleccion}}</td>
+        <td>{{metrica.server_name}}</td>
+        <td><button class="btn btn-success" (click)="editMetrica(metrica.id)">Editar</button> | <button class="btn btn-danger" (click)="deleteMetrica(metrica.id)">Eliminar</button></td>
+      </tr>
+    </tbody>
+</table>
+<button class="btn btn-info" (click)="createMetrica()">Agregar metrica</button>
