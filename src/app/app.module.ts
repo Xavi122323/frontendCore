@@ -22,6 +22,9 @@ import { UpdateComponenteComponent } from './componente/update-componente/update
 import { ListDatabaseComponent } from './bd/list-database/list-database.component';
 import { CreateDatabaseComponent } from './bd/create-database/create-database.component';
 import { UpdateDatabaseComponent } from './bd/update-database/update-database.component';
+import { ListMetricaComponent } from './metrica/list-metrica/list-metrica.component';
+import { CreateMetricaComponent } from './metrica/create-metrica/create-metrica.component';
+import { UpdateMetricaComponent } from './metrica/update-metrica/update-metrica.component';
 
 
 @NgModule({
@@ -40,7 +43,10 @@ import { UpdateDatabaseComponent } from './bd/update-database/update-database.co
     UpdateComponenteComponent,
     ListDatabaseComponent,
     CreateDatabaseComponent,
-    UpdateDatabaseComponent
+    UpdateDatabaseComponent,
+    ListMetricaComponent,
+    CreateMetricaComponent,
+    UpdateMetricaComponent
   ],
   imports: [
     BrowserModule,
