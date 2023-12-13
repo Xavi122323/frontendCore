@@ -26,11 +26,14 @@ export class UpdateMetricaComponent {
     this.metricaService.findMetrica(this.id).subscribe(
       (metrica) => {
         this.metrica=metrica
+        const date = new Date(this.metrica.fechaRecoleccion);
+        const formattedDate = `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}-${String(date.getDate()).padStart(2, '0')}T${String(date.getHours()).padStart(2, '0')}:${String(date.getMinutes()).padStart(2, '0')}`;
+        console.log(formattedDate);
         this.metricaForm = new FormGroup({
           usoCPU: new FormControl(this.metrica.usoCPU),
           usoMemoria: new FormControl(this.metrica.usoMemoria),
           usoAlmacenamiento: new FormControl(this.metrica.usoAlmacenamiento),
-          fechaRecoleccion: new FormControl(this.metrica.fechaRecoleccion),
+          fechaRecoleccion: new FormControl(formattedDate),
           servidor_id: new FormControl(this.metrica.servidor_id),
         });
       }
