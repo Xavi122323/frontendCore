@@ -25,6 +25,7 @@ import { UpdateDatabaseComponent } from './bd/update-database/update-database.co
 import { ListMetricaComponent } from './metrica/list-metrica/list-metrica.component';
 import { CreateMetricaComponent } from './metrica/create-metrica/create-metrica.component';
 import { UpdateMetricaComponent } from './metrica/update-metrica/update-metrica.component';
+import { UsoCPUComponent } from './consultas/uso-cpu/uso-cpu.component';
 
 
 @NgModule({
@@ -46,7 +47,8 @@ import { UpdateMetricaComponent } from './metrica/update-metrica/update-metrica.
     UpdateDatabaseComponent,
     ListMetricaComponent,
     CreateMetricaComponent,
-    UpdateMetricaComponent
+    UpdateMetricaComponent,
+    UsoCPUComponent
   ],
   imports: [
     BrowserModule,

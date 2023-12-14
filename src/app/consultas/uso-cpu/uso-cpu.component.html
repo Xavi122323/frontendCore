@@ -1,0 +1,9 @@
+<div class="mb-3">
+    <label for="servidor_id" class="form-label">Servidor</label>
+    <select [(ngModel)]="serverId" placeholder="Server ID">
+      <option *ngFor="let server of servidor" [value]="server.id">{{ server.nombre }}</option>
+    </select>
+</div>
+<input type="date" [(ngModel)]="startDate">
+<input type="date" [(ngModel)]="endDate">
+<button (click)="fetchData()">Get CPU Usage</button>
