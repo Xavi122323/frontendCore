@@ -5,11 +5,11 @@ $gray-light: #ccc;
 $gray-dark: #333;
 $primary-blue: #2196f3;
 
-// Mixins for input and button styles
+// Mixins for form elements and button styles
 @mixin form-element {
   display: block;
-  width: 100%;
-  padding: 0.5rem;
+  width: calc(100% - 2rem); // Adjusting for padding
+  padding: 0.5rem 1rem;
   font-size: 1rem;
   line-height: 1.5;
   color: $black;
@@ -30,22 +30,18 @@ $primary-blue: #2196f3;
   color: $white;
   background-color: $primary-blue;
   border-color: $primary-blue;
-  display: inline-block;
-  font-weight: 400;
-  text-align: center;
-  vertical-align: middle;
-  user-select: none;
-  background-clip: border-box;
-  border: 1px solid transparent;
-  padding: 0.375rem 0.75rem;
+  display: block; // Make the button block-level for easier centering
+  width: auto; // Allow the button to shrink to its content size
+  padding: 0.5rem 1rem;
   font-size: 1rem;
   line-height: 1.5;
   border-radius: 0.25rem;
   transition: color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out;
+  margin: 1rem 0; // Space above and below the button
+  cursor: pointer;
 
   &:hover {
     background-color: darken($primary-blue, 10%);
-    border-color: darken($primary-blue, 10%);
   }
 
   &:focus {
@@ -54,35 +50,46 @@ $primary-blue: #2196f3;
   }
 }
 
-// Form element styles
-.mb-3 {
-  margin-bottom: 1rem;
-  
-  label {
-    display: block;
-    margin-bottom: .5rem;
-    color: $gray-dark;
+// Form container to control the maximum width and centering
+.form-container {
+  max-width: 600px;
+  margin: 0 auto;
+
+  .mb-3 {
+    margin-bottom: 1rem;
+
+    label {
+      display: block;
+      margin-bottom: .5rem;
+      color: $gray-dark;
+    }
+
+    select {
+      @include form-element;
+      -webkit-appearance: none; // Remove default styling for Webkit browsers
+      -moz-appearance: none;    // Remove default styling for Firefox
+      appearance: none;         // Remove default styling for modern browsers
+    }
+
+    input[type='date'] {
+      @include form-element;
+      margin-bottom: 1rem; // Space between the date inputs and the button
+    }
   }
 
-  select {
-    @include form-element;
+  button {
+    @include button-style;
+    text-align: center;
   }
 }
 
-input[type='date'] {
-  @include form-element;
-  margin-bottom: 1rem; // Space between the inputs and the button
-}
-
-button {
-  @include button-style;
-  margin-top: 1rem; // Space above the button
-}
-
-// Responsive Design
+// Responsive adjustments for smaller screens
 @media (max-width: 768px) {
-  .mb-3, input[type='date'], button {
-    width: 100%;
-    margin-bottom: 1rem; // Increase bottom margin on mobile for better spacing
+  .form-container {
+    width: 90%; // adjust the form container width on smaller screens
+
+    .mb-3, input[type='date'], button {
+      width: calc(100% - 2rem); // adjust the width of elements within the form container
+    }
   }
 }
