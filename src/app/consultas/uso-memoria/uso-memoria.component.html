@@ -1,0 +1,26 @@
+<div class="form-container">
+    <div class="mb-3">
+      <label for="servidor_id" class="form-label">Servidor</label>
+      <select [(ngModel)]="serverId" id="servidor_id" placeholder="Server ID">
+        <option *ngFor="let server of servidor" [value]="server.id">{{ server.nombre }}</option>
+      </select>
+    </div>
+    <input type="date" [(ngModel)]="startDate">
+    <input type="date" [(ngModel)]="endDate">
+    <button (click)="fetchData()">Obtener uso</button>
+    <div *ngIf="averageMemoryUsage !== null" class="average-memory-usage">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">Uso de Memoria promedio</h5>
+          <p class="card-text">
+            El uso promedio de memoria entre {{ startDate }} y {{ endDate }} es:
+            <strong>{{ averageMemoryUsage | number:'1.1-2' }}</strong>
+          </p>
+        </div>
+      </div>
+    </div>
+    <div *ngIf="errorMessage" class="alert alert-warning">
+      {{ errorMessage }}
+    </div>
+    <canvas id="myChart"></canvas>
+  </div>

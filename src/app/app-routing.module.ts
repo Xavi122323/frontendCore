@@ -19,6 +19,7 @@ import { ListMetricaComponent } from './metrica/list-metrica/list-metrica.compon
 import { CreateMetricaComponent } from './metrica/create-metrica/create-metrica.component';
 import { UpdateMetricaComponent } from './metrica/update-metrica/update-metrica.component';
 import { UsoCPUComponent } from './consultas/uso-cpu/uso-cpu.component';
+import { UsoMemoriaComponent } from './consultas/uso-memoria/uso-memoria.component';
 
 const routes: Routes = [
   {path:'', component:SignInComponent},
@@ -37,7 +38,8 @@ const routes: Routes = [
   {path:'list/metrica', component:ListMetricaComponent, canActivate:[AuthGuard]},
   {path:'create/metrica', component:CreateMetricaComponent, canActivate:[AuthGuard]},
   {path:'edit/metrica/:metricaID', component:UpdateMetricaComponent, canActivate:[AuthGuard]},
-  {path:'consulta/usoCPU', component:UsoCPUComponent, canActivate:[AuthGuard]}
+  {path:'consulta/usoCPU', component:UsoCPUComponent, canActivate:[AuthGuard]},
+  {path:'consulta/usoMemoria', component:UsoMemoriaComponent, canActivate:[AuthGuard]}
 ];
 
 @NgModule({

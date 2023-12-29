@@ -10,6 +10,8 @@ import { MetricaService } from 'src/app/services/metrica.service';
 export class ListMetricaComponent {
 
   metricas: any;
+  servidorFilter: string | undefined;
+  fechaRecoleccionFilter: string | undefined;
 
   constructor(private metricaService: MetricaService, private router: Router) {}
 
@@ -17,10 +19,27 @@ export class ListMetricaComponent {
     this.metricaList();
   }
 
-  metricaList(){
+  /*metricaList(){
     this.metricaService.listMetricas().subscribe((data) => {
       this.metricas = data;
     })
+  }*/
+
+  applyFilters() {
+    const filters: {servidor?: string, fechaRecoleccion?: string} = {};
+
+    if (this.servidorFilter) filters['servidor'] = this.servidorFilter;
+    if (this.fechaRecoleccionFilter) filters['fechaRecoleccion'] = this.fechaRecoleccionFilter;
+  
+    this.metricaList(filters);
+  }
+
+  metricaList(filters?: any) {
+    this.metricaService.listMetricas(filters).subscribe(
+      (metricas) => {
+        this.metricas = metricas;
+      }
+    );
   }
 
   deleteMetrica(id: any){

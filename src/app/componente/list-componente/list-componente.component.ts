@@ -10,20 +10,28 @@ import { Router } from '@angular/router';
 export class ListComponenteComponent {
 
   componente: any;
+  servidorFilter: string | undefined;
 
   constructor(private componenteService: ComponenteService, private router: Router) {
+  }
+
+  applyFilters() {
+    const filters: {servidor?: string } = {};
+    if (this.servidorFilter) filters['servidor'] = this.servidorFilter;
+  
+    this.componenteList(filters);
   }
 
   ngOnInit(): void {
     this.componenteList();
   }
 
-  componenteList(){
-    this.componenteService.listComponentes().subscribe(
+  componenteList(filters?: any) {
+    this.componenteService.listComponentes(filters).subscribe(
       (componente) => {
-        this.componente = componente
+        this.componente = componente;
       }
-    )
+    );
   }
 
   deleteComponente(id: any){

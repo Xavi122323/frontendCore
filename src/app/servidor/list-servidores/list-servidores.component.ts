@@ -10,21 +10,36 @@ import { Router } from '@angular/router';
 export class ListServidoresComponent {
 
   servidor: any;
+  nameFilter: string | undefined;
 
   constructor(private servidorService: ServidorService, private router: Router){
 
+  }
+
+  applyFilters() {
+    const filters: { nombre?: string } = {};
+    if (this.nameFilter) filters['nombre'] = this.nameFilter;
+    this.serverList(filters);
   }
 
   ngOnInit(){
     this.serverList();
   }
 
-  serverList(){
+  /*serverList(){
     this.servidorService.listServidores().subscribe(
       servidor => {
         this.servidor = servidor;
       }
     )
+  }*/
+
+  serverList(filters?: any) {
+    this.servidorService.listServidores(filters).subscribe(
+      servidor => {
+        this.servidor = servidor;
+      }
+    );
   }
 
   deleteServer(id:any){

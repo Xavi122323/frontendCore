@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { AuthenticatorService } from './authenticator.service';
 
@@ -17,8 +17,18 @@ export class DatabaseService {
     headers: new HttpHeaders({ 'Content-Type': 'application/json'})
   }
 
-  listDatabase(): Observable<any>{
+  /*listDatabase(): Observable<any>{
     return this.http.get(this.url+'/api/v1/database', this.authService.getHttpOptions())
+  }*/
+
+  listDatabase(filters?: any): Observable<any> {
+    let params = new HttpParams();
+    if (filters) {
+      Object.keys(filters).forEach(key => {
+        params = params.append(key, filters[key]);
+      });
+    }
+    return this.http.get(this.url + '/api/v1/database', { params });
   }
 
   addDatabase(data: any): Observable<any>{

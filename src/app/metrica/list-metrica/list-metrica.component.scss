@@ -1,4 +1,4 @@
-// Define Panda color palette
+// Define color palette
 $white: #fff;
 $panda-black: #2a2a2a;
 $panda-white: #ffffff;
@@ -12,8 +12,8 @@ $danger-red: #f44336;
 @mixin button-style($bg-color, $text-color: $white) {
   background-color: $bg-color;
   color: $text-color;
-  padding: 4px 8px; // Reduced padding
-  margin: 0 2px; // Reduced margin
+  padding: 4px 8px;
+  margin: 0 2px;
   cursor: pointer;
   border: none;
   border-radius: 4px;
@@ -31,6 +31,22 @@ $danger-red: #f44336;
   }
 }
 
+@mixin form-input-style {
+  display: block;
+  width: 50%;
+  padding: 0.5rem 1rem;
+  margin: 0 auto 1rem;
+  font-size: 1rem;
+  border: 1px solid $panda-grey-light;
+  border-radius: 4px;
+
+  &:focus {
+    border-color: $info-blue;
+    outline: none;
+    box-shadow: 0 0 0 0.2rem rgba($info-blue, 0.25);
+  }
+}
+
 // Global Styles
 body {
   background-color: $panda-white;
@@ -42,28 +58,41 @@ h1 {
   text-align: center;
 }
 
+// Input Field Styles
+input[type="text"] {
+  @include form-input-style;
+}
+
+input[type="date"] {
+  display: block;
+  width: 8%;
+  padding: 0.5rem 1rem;
+  margin: 0 auto 1rem;
+  font-size: 1rem;
+  border: 1px solid $panda-grey-light;
+  border-radius: 4px;
+}
+
 // Table Styles
 .table {
   width: 100%;
   max-width: 960px;
   margin: 20px auto;
   border-collapse: collapse;
-  table-layout: fixed; // Use fixed layout for equal distribution
+  table-layout: fixed;
 
   thead {
     background-color: $panda-grey-dark;
-    color: $panda-white;
+    color: $white;
   }
 
   th, td {
     padding: 10px;
-    text-align: left;
     border: 1px solid $panda-grey-light;
-  }
+    text-align: left;
 
-  th {
     &:last-child {
-      width: 25%; // Assign more space for action buttons if needed
+      width: 25%;
     }
   }
 
@@ -76,17 +105,12 @@ h1 {
         background-color: $panda-white;
       }
     }
-    td {
-      &:nth-child(-n+3) { // Assuming first three columns are numerical
-        text-align: right;
-      }
-    }
   }
 }
 
 // Button Styles
 .btn {
-  @include button-style($panda-black); // Default button style
+  @include button-style($panda-black); 
 
   &-success {
     @include button-style($success-green);
@@ -98,29 +122,10 @@ h1 {
 
   &-info {
     @include button-style($info-blue);
-  }
-
-  // Icon Buttons (if you choose to use icons)
-  &-edit, &-delete {
-    @include button-style($panda-grey-dark); // Style for edit/delete buttons
-    font-size: 12px; // Smaller font size for text in buttons
-  }
-}
-
-// Additional Styles
-.add-button {
-  background-color: $info-blue;
-  color: $white;
-  padding: 10px 15px;
-  margin: 10px 0;
-  border: none;
-  border-radius: 4px;
-  font-size: 14px;
-  cursor: pointer;
-  transition: background-color 0.3s;
-
-  &:hover {
-    background-color: darken($info-blue, 10%);
+    display: block;
+    width: auto;
+    margin: 20px auto;
+    text-align: center;
   }
 }
 
@@ -132,10 +137,16 @@ h1 {
   }
 
   th, td {
-    padding: 8px; // Smaller padding on mobile
+    padding: 8px;
   }
 
   .btn {
-    padding: 4px 6px; // Smaller buttons on mobile
+    padding: 4px 6px;
+    font-size: 12px;
+  }
+
+  input[type="text"] {
+    width: calc(100% - 40px);
+    margin: 0 20px 1rem;
   }
 }

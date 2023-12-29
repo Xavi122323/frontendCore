@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { AuthenticatorService } from './authenticator.service';
 
@@ -17,8 +17,18 @@ export class MetricaService {
     headers: new HttpHeaders({ 'Content-Type': 'application/json'})
   };
 
-  listMetricas(): Observable<any> {
+  /*listMetricas(): Observable<any> {
     return this.http.get(this.url+'/api/v1/metrica', this.authService.getHttpOptions());
+  }*/
+
+  listMetricas(filters?: any): Observable<any> {
+    let params = new HttpParams();
+    if (filters) {
+      Object.keys(filters).forEach(key => {
+        params = params.append(key, filters[key]);
+      });
+    }
+    return this.http.get(this.url + '/api/v1/metrica', { params });
   }
 
   addMetrica(data: any): Observable<any>{

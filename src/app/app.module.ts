@@ -3,6 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatButtonModule } from '@angular/material/button';
+import { MatMenuModule } from '@angular/material/menu';
 
 import { AppRoutingModule } from './app-routing.module';
 import { ReactiveFormsModule, FormsModule} from '@angular/forms';
@@ -26,6 +27,7 @@ import { ListMetricaComponent } from './metrica/list-metrica/list-metrica.compon
 import { CreateMetricaComponent } from './metrica/create-metrica/create-metrica.component';
 import { UpdateMetricaComponent } from './metrica/update-metrica/update-metrica.component';
 import { UsoCPUComponent } from './consultas/uso-cpu/uso-cpu.component';
+import { UsoMemoriaComponent } from './consultas/uso-memoria/uso-memoria.component';
 
 
 @NgModule({
@@ -48,7 +50,8 @@ import { UsoCPUComponent } from './consultas/uso-cpu/uso-cpu.component';
     ListMetricaComponent,
     CreateMetricaComponent,
     UpdateMetricaComponent,
-    UsoCPUComponent
+    UsoCPUComponent,
+    UsoMemoriaComponent
   ],
   imports: [
     BrowserModule,
@@ -58,7 +61,8 @@ import { UsoCPUComponent } from './consultas/uso-cpu/uso-cpu.component';
     FormsModule,
     BrowserAnimationsModule,
     MatToolbarModule,
-    MatButtonModule
+    MatButtonModule,
+    MatMenuModule
   ],
   providers: [],
   bootstrap: [AppComponent]

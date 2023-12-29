@@ -4,11 +4,11 @@ import { ServidorService } from 'src/app/services/servidor.service';
 import { Chart } from 'chart.js/auto';
 
 @Component({
-  selector: 'app-uso-cpu',
-  templateUrl: './uso-cpu.component.html',
-  styleUrls: ['./uso-cpu.component.scss']
+  selector: 'app-uso-memoria',
+  templateUrl: './uso-memoria.component.html',
+  styleUrls: ['./uso-memoria.component.scss']
 })
-export class UsoCPUComponent {
+export class UsoMemoriaComponent {
 
   serverId: any;
   startDate: string = '';
@@ -18,15 +18,15 @@ export class UsoCPUComponent {
   metricas: any = [];
   chart: Chart | null = null;
   errorMessage: string = '';
-  averageCpuUsage: number | null = null;
+  averageMemoryUsage: number | null = null;
 
   constructor(private consultasService: ConsultasService, private servidorService: ServidorService) {}
 
   fetchData() {
-    this.consultasService.getAverageCpuUsage(this.serverId, this.startDate, this.endDate)
+    this.consultasService.getAverageMemoryUsage(this.serverId, this.startDate, this.endDate)
       .subscribe({
         next: (avgData) => {
-          this.averageCpuUsage = avgData.average_cpu;
+          this.averageMemoryUsage = avgData.average_memoria;
           this.errorMessage = '';
         },
         error: (err) => {
@@ -34,7 +34,7 @@ export class UsoCPUComponent {
         }
       });
 
-    this.consultasService.getCpuUsage(this.serverId, this.startDate, this.endDate)
+    this.consultasService.getMemoryUsage(this.serverId, this.startDate, this.endDate)
       .subscribe({
         next: (data) => {
           this.metricas = data;
@@ -83,12 +83,12 @@ export class UsoCPUComponent {
     }
   
     const labels = metricaData.map(row => row.fechaRecoleccion);
-    const data = metricaData.map(row => row.usoCPU);
+    const data = metricaData.map(row => row.usoMemoria);
   
     const chartData = {
       labels: labels,
       datasets: [{
-        label: 'Uso CPU',
+        label: 'Uso de Memoria',
         data: data,
       }]
     };
@@ -101,5 +101,4 @@ export class UsoCPUComponent {
   
     this.chart = new Chart(ctx, config);
   }
-
 }
