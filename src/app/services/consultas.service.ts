@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { throwError } from 'rxjs';
@@ -85,6 +85,26 @@ export class ConsultasService {
         }
       })
     );
+  }
+
+  getTransactionTotals(nombres?: string[], servidorId?: number, startDate?: string, endDate?: string): Observable<any> {
+    let params = new HttpParams();
+    if (nombres) {
+      nombres.forEach(nombre => {
+        params = params.append('nombres[]', nombre);
+      });
+    }
+    if (servidorId) {
+      params = params.append('servidor_id', servidorId.toString());
+    }
+    if (startDate) {
+      params = params.append('start_date', startDate);
+    }
+    if (endDate) {
+      params = params.append('end_date', endDate);
+    }
+
+    return this.http.get(this.url+'/api/v1/transaccionesTotales', { params });
   }
 
 }

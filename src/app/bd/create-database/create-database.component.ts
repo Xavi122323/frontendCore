@@ -16,8 +16,8 @@ export class CreateDatabaseComponent {
 
   databaseForm = new FormGroup({
     nombre: new FormControl(''),
-    transaccionesDia: new FormControl(''),
-    transaccionesMes: new FormControl(''),
+    transacciones: new FormControl(''),
+    fechaTransaccion: new FormControl(''),
     servidor_id: new FormControl(''),
   })
 

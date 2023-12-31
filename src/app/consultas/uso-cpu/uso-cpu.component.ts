@@ -28,18 +28,21 @@ export class UsoCPUComponent {
         next: (avgData) => {
           this.averageCpuUsage = avgData.average_cpu;
           this.errorMessage = '';
+          console.log('Average CPU usage fetched successfully');
         },
         error: (err) => {
           this.errorMessage = err.message;
+          console.log('Error fetching average CPU usage:', err.message);
         }
       });
-
+  
     this.consultasService.getCpuUsage(this.serverId, this.startDate, this.endDate)
       .subscribe({
         next: (data) => {
           this.metricas = data;
           this.createChart(this.metricas);
           this.errorMessage = '';
+          console.log('CPU usage fetched successfully');
         },
         error: (err) => {
           this.errorMessage = err.message;
@@ -47,6 +50,7 @@ export class UsoCPUComponent {
             this.chart.destroy();
             this.chart = null;
           }
+          console.log('Error fetching CPU usage:', err.message);
         }
       });
   }
@@ -59,7 +63,7 @@ export class UsoCPUComponent {
     )
   }
 
-  createChart(metricaData: any[]) {
+  createChart(baseData: any[]) {
     const canvas = document.getElementById('myChart') as HTMLCanvasElement;
     const ctx = canvas.getContext('2d');
 
@@ -73,7 +77,7 @@ export class UsoCPUComponent {
       return;
     }
 
-    if (!Array.isArray(metricaData)) {
+    if (!Array.isArray(baseData)) {
       console.error('metricaData is not an array');
       return;
     }
@@ -82,13 +86,13 @@ export class UsoCPUComponent {
       this.chart.destroy();
     }
   
-    const labels = metricaData.map(row => row.fechaRecoleccion);
-    const data = metricaData.map(row => row.usoCPU);
+    const labels = baseData.map(row => row.nombre);
+    const data = baseData.map(row => row.total_transacciones);
   
     const chartData = {
       labels: labels,
       datasets: [{
-        label: 'Uso CPU',
+        label: 'Transacciones',
         data: data,
       }]
     };

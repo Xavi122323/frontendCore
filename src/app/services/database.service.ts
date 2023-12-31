@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, map } from 'rxjs';
 import { AuthenticatorService } from './authenticator.service';
 
 @Injectable({
@@ -29,6 +29,15 @@ export class DatabaseService {
       });
     }
     return this.http.get(this.url + '/api/v1/database', { params });
+  }
+
+  listDatabaseNames(): Observable<any> {
+    return this.http.get<any[]>(`${this.url}/api/v1/database`, this.authService.getHttpOptions()).pipe(
+      map(databases => {
+        const uniqueNames = Array.from(new Set(databases.map(db => db.nombre)));
+        return uniqueNames.map(nombre => ({ nombre }));
+      })
+    );
   }
 
   addDatabase(data: any): Observable<any>{

@@ -28,8 +28,8 @@ export class UpdateDatabaseComponent {
         this.database=database
         this.databaseForm = new FormGroup({
           nombre: new FormControl(this.database.nombre),
-          transaccionesDia: new FormControl(this.database.transaccionesDia),
-          transaccionesMes: new FormControl(this.database.transaccionesMes),
+          transacciones: new FormControl(this.database.transacciones),
+          fechaTransaccion: new FormControl(this.database.fechaTransaccion),
           servidor_id: new FormControl(this.database.servidor_id),
         });
       }

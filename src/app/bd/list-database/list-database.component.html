@@ -5,16 +5,16 @@
     <thead>
       <tr>
         <th scope="col">Nombre</th>
-        <th scope="col">Transacciones por día</th>
-        <th scope="col">Transacciones por mes</th>
+        <th scope="col">Transacciones</th>
+        <th scope="col">Fecha de transaccion</th>
         <th scope="col">Servidor</th>
       </tr>
     </thead>
     <tbody>
       <tr *ngFor="let database of databases">
         <td>{{database.nombre}}</td>
-        <td>{{database.transaccionesDia}}</td>
-        <td>{{database.transaccionesMes}}</td>
+        <td>{{database.transacciones}}</td>
+        <td>{{database.fechaTransaccion}}</td>
         <td>{{database.server_name}}</td>
         <td><button class="btn btn-success" (click)="editDatabase(database.id)">Editar</button> | <button class="btn btn-danger" (click)="deleteDatabase(database.id)">Eliminar</button></td>
       </tr>

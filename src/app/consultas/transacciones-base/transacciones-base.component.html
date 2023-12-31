@@ -1,0 +1,24 @@
+    <div class="form-container">
+
+        <div class="checkbox-container" *ngFor="let database of databaseNames">
+            <input type="checkbox" [id]="database.nombre" (change)="toggleDatabaseSelection(database.nombre)">
+            <label [for]="database.nombre">{{ database.nombre }}</label>
+        </div>
+        <div class="mb-3">
+        <select [(ngModel)]="selectedServer">
+            <option *ngFor="let server of servers" [value]="server.id">{{ server.nombre }}</option>
+       </select>
+       </div>
+       <input type="date" [(ngModel)]="startDate" placeholder="Start Date">
+       <input type="date" [(ngModel)]="endDate" placeholder="End Date">
+
+       <button (click)="onSearch()">Search</button>
+
+       <button (click)="clearFilters()">Limpiar filtros</button>
+
+       <div *ngIf="transactionTotals.length > 0">
+        <canvas id="myChart"></canvas>
+        </div>
+    </div>
+
+  
