@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ConsultasService } from 'src/app/services/consultas.service';
 import { ServidorService } from 'src/app/services/servidor.service';
 import { DatabaseService } from 'src/app/services/database.service';
@@ -9,7 +9,7 @@ import { Chart } from 'chart.js/auto';
   templateUrl: './transacciones-base.component.html',
   styleUrls: ['./transacciones-base.component.scss']
 })
-export class TransaccionesBaseComponent {
+export class TransaccionesBaseComponent implements OnInit{
 
   nombres: string[] = [];
   servidorId?: number;
@@ -21,7 +21,9 @@ export class TransaccionesBaseComponent {
   selectedServer?: number;
   databaseNames: any[] = [];
   selectedDatabases: Set<string> = new Set();
+  errorMessage: string = '';
   chart: Chart | null = null;
+  averageTransactions: number | null = null;
 
   constructor(private consultasService: ConsultasService, private servidorService: ServidorService, private databaseService: DatabaseService) { }
 
@@ -31,11 +33,11 @@ export class TransaccionesBaseComponent {
   }
 
   fetchDatabaseNames() {
-    this.databaseService.listDatabaseNames().subscribe(
+    this.databaseService.listUniqueDatabaseNames().subscribe(
       data => {
-        this.databaseNames = data;
+        this.databaseNames = data.map(nombre => ({ nombre }));
       },
-      error => console.error('Error fetching database names', error)
+      error => console.error('Error fetching unique database names', error)
     );
   }
 
@@ -56,18 +58,39 @@ export class TransaccionesBaseComponent {
 
   onSearch(): void {
     const selectedNamesArray = Array.from(this.selectedDatabases);
+
+    this.consultasService.getAverageTransactions(selectedNamesArray, this.selectedServer, this.startDate, this.endDate)
+      .subscribe({
+        next: (data) => {
+          this.averageTransactions = data.sum;
+          this.errorMessage = '';
+          console.log('Average CPU usage fetched successfully');
+        },
+        error: (err) => {
+          this.errorMessage = err.message;
+          console.log('Error fetching average CPU usage:', err.message);
+        }
+      });
+
     this.consultasService.getTransactionTotals(selectedNamesArray, this.selectedServer, this.startDate, this.endDate)
-      .subscribe(
-        data => {
+      .subscribe({
+        next: (data) => {
           this.transactionTotals = data;
-            setTimeout(() => {
+          this.errorMessage = '';
+          setTimeout(() => {
             this.createChart(this.transactionTotals);
           }, 0);
+          console.log('Average CPU usage fetched successfully');
         },
-        error => {
-          console.error('There was an error retrieving the data', error);
+        error: (err) => {
+          this.errorMessage = err.message;
+          if (this.chart) {
+            this.chart.destroy();
+            this.chart = null;
+          }
+          console.log('Error fetching average CPU usage:', err.message);
         }
-      );
+      });
   }
 
   clearFilters(): void {

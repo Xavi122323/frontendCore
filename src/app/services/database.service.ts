@@ -31,13 +31,10 @@ export class DatabaseService {
     return this.http.get(this.url + '/api/v1/database', { params });
   }
 
-  listDatabaseNames(): Observable<any> {
-    return this.http.get<any[]>(`${this.url}/api/v1/database`, this.authService.getHttpOptions()).pipe(
-      map(databases => {
-        const uniqueNames = Array.from(new Set(databases.map(db => db.nombre)));
-        return uniqueNames.map(nombre => ({ nombre }));
-      })
-    );
+  listUniqueDatabaseNames(): Observable<string[]> {
+    return this.http.get<string[]>(`${this.url}/api/v1/database`, {
+      params: new HttpParams().set('unique_names', 'true')
+    });
   }
 
   addDatabase(data: any): Observable<any>{

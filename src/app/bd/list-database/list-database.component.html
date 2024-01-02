@@ -1,6 +1,7 @@
 <h1>Lista de base de datos</h1>
 <input type="text" placeholder="Servidor" [(ngModel)]="servidorFilter" (input)="applyFilters()">
 <input type="text" placeholder="Nombre" [(ngModel)]="nombreFilter" (input)="applyFilters()">
+<input type="date" [(ngModel)]="fechaRecoleccionFilter" (input)="applyFilters()">
 <table class="table">
     <thead>
       <tr>

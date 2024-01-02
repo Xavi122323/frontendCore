@@ -12,6 +12,7 @@ export class ListDatabaseComponent {
   databases: any;
   nombreFilter: string | undefined;
   servidorFilter: string | undefined;
+  fechaRecoleccionFilter: string | undefined;
 
   constructor(private databaseService: DatabaseService, private router: Router) {}
 
@@ -26,10 +27,11 @@ export class ListDatabaseComponent {
   }*/
 
   applyFilters() {
-    const filters: {nombre?: string, servidor?: string } = {};
+    const filters: {nombre?: string, servidor?: string, fechaRecoleccion?: string} = {};
 
     if (this.nombreFilter) filters['nombre'] = this.nombreFilter;
     if (this.servidorFilter) filters['servidor'] = this.servidorFilter;
+    if (this.fechaRecoleccionFilter) filters['fechaRecoleccion'] = this.fechaRecoleccionFilter;
   
     this.databaseList(filters);
   }

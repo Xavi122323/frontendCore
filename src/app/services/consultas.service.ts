@@ -87,6 +87,39 @@ export class ConsultasService {
     );
   }
 
+  getAverageTransactions(nombres?: string[], servidorId?: number, startDate?: string, endDate?: string): Observable<any> {
+    let params = new HttpParams();
+    if (nombres) {
+      nombres.forEach(nombre => {
+        params = params.append('nombres[]', nombre);
+      });
+    }
+    if (servidorId) {
+      params = params.append('servidor_id', servidorId.toString());
+    }
+    if (startDate) {
+      params = params.append('start_date', startDate);
+    }
+    if (endDate) {
+      params = params.append('end_date', endDate);
+    }
+
+    return this.http.get(this.url+'/api/v1/sumaTransacciones', { params })
+    .pipe(
+      catchError((error) => {
+        if (error.status === 404) {
+          return throwError(() => new Error("No hay datos para las fechas ingresadas"));
+        }
+        else if(error.status === 400) {
+          return throwError(() => new Error("Error parametros faltantes por ingresar"));
+        } 
+        else {
+          return throwError(() => new Error("Error inesperado"));
+        }
+      })
+    );
+  }
+
   getTransactionTotals(nombres?: string[], servidorId?: number, startDate?: string, endDate?: string): Observable<any> {
     let params = new HttpParams();
     if (nombres) {
@@ -104,7 +137,20 @@ export class ConsultasService {
       params = params.append('end_date', endDate);
     }
 
-    return this.http.get(this.url+'/api/v1/transaccionesTotales', { params });
+    return this.http.get(this.url+'/api/v1/transaccionesTotales', { params })
+    .pipe(
+      catchError((error) => {
+        if (error.status === 404) {
+          return throwError(() => new Error("No hay datos para las fechas ingresadas"));
+        }
+        else if(error.status === 400) {
+          return throwError(() => new Error("Error parametros faltantes por ingresar"));
+        } 
+        else {
+          return throwError(() => new Error("Error inesperado"));
+        }
+      })
+    );
   }
 
 }
