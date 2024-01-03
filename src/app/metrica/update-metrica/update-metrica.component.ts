@@ -27,7 +27,7 @@ export class UpdateMetricaComponent {
       (metrica) => {
         this.metrica=metrica
         const date = new Date(this.metrica.fechaRecoleccion);
-        const formattedDate = `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}-${String(date.getDate()).padStart(2, '0')}T${String(date.getHours()).padStart(2, '0')}:${String(date.getMinutes()).padStart(2, '0')}`;
+        const formattedDate = date.toISOString().slice(0, 16);
         console.log(formattedDate);
         this.metricaForm = new FormGroup({
           usoCPU: new FormControl(this.metrica.usoCPU),
@@ -48,7 +48,7 @@ export class UpdateMetricaComponent {
   onSubmit(){
     this.metricaService.editMetrica(this.metricaForm.value, this.id).subscribe(
       (metrica) =>{
-        
+        console.log(this.metricaForm)
       }
     )
     this.router.navigate(['list/metrica']);

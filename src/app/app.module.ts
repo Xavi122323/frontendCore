@@ -29,6 +29,7 @@ import { UpdateMetricaComponent } from './metrica/update-metrica/update-metrica.
 import { UsoCPUComponent } from './consultas/uso-cpu/uso-cpu.component';
 import { UsoMemoriaComponent } from './consultas/uso-memoria/uso-memoria.component';
 import { TransaccionesBaseComponent } from './consultas/transacciones-base/transacciones-base.component';
+import { ComparacionServidoresComponent } from './consultas/comparacion-servidores/comparacion-servidores.component';
 
 
 @NgModule({
@@ -53,7 +54,8 @@ import { TransaccionesBaseComponent } from './consultas/transacciones-base/trans
     UpdateMetricaComponent,
     UsoCPUComponent,
     UsoMemoriaComponent,
-    TransaccionesBaseComponent
+    TransaccionesBaseComponent,
+    ComparacionServidoresComponent
   ],
   imports: [
     BrowserModule,

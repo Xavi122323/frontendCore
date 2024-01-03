@@ -42,7 +42,7 @@ export class UsoCPUComponent {
           this.metricas = data;
           this.createChart(this.metricas);
           this.errorMessage = '';
-          console.log('CPU usage fetched successfully');
+          console.log('CPU usage fetched successfully', data);
         },
         error: (err) => {
           this.errorMessage = err.message;
@@ -86,8 +86,8 @@ export class UsoCPUComponent {
       this.chart.destroy();
     }
   
-    const labels = baseData.map(row => row.nombre);
-    const data = baseData.map(row => row.total_transacciones);
+    const labels = baseData.map(row => row.fechaRecoleccion);
+    const data = baseData.map(row => row.usoCPU);
   
     const chartData = {
       labels: labels,

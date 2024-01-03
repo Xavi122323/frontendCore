@@ -16,7 +16,7 @@
         <td>{{metrica.usoCPU}}</td>
         <td>{{metrica.usoMemoria}}</td>
         <td>{{metrica.usoAlmacenamiento}}</td>
-        <td>{{metrica.fechaRecoleccion | date: 'yyyy-MM-dd HH:mm'}}</td>
+        <td>{{metrica.fechaRecoleccion | date: 'yyyy-MM-dd HH:mm':'UTC'}}</td>
         <td>{{metrica.server_name}}</td>
         <td><button class="btn btn-success" (click)="editMetrica(metrica.id)">Editar</button> | <button class="btn btn-danger" (click)="deleteMetrica(metrica.id)">Eliminar</button></td>
       </tr>

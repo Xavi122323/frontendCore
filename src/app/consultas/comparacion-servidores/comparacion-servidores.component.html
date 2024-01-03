@@ -1,0 +1,48 @@
+<div class="form-container">
+    <form #comparisonForm="ngForm" (ngSubmit)="onSubmit()">
+      <div class="form-group">
+        <label for="startDate">Fecha inicio:</label>
+        <input type="date" id="startDate" name="startDate" [(ngModel)]="startDate" required>
+      </div>
+  
+      <div class="form-group">
+        <label for="endDate">Fecha fin:</label>
+        <input type="date" id="endDate" name="endDate" [(ngModel)]="endDate" required>
+      </div>
+  
+      <div class="form-group">
+        <label>Seleccione Servidores:</label>
+        <div class="checkbox-container" *ngFor="let server of servidor">
+            <input type="checkbox" (change)="toggleSelection(server.id, selectedServers)" [checked]="selectedServers.includes(server.id)">
+            {{ server.nombre }}
+        </div>
+      </div>
+  
+      <div class="form-group">
+        <label>Seleccione Parámetros:</label>
+        <div class="checkbox-container" *ngFor="let param of ['CPU', 'Memoria', 'Almacenamiento', 'Transacciones']">
+            <input type="checkbox" (change)="toggleSelection(param, selectedParams)" [checked]="selectedParams.includes(param)">
+            {{ param }}
+        </div>
+      </div>
+  
+      <button type="submit" class="btn btn-primary">Comparar</button>
+    </form>
+  
+    <div *ngIf="errorMessage" class="error-message">{{ errorMessage }}</div>
+    <div *ngIf="comparisonResults">
+      <h2>Resultados de la Comparación:</h2>
+      <div *ngFor="let result of comparisonResults">
+        <h3>{{ result.servidor }}</h3>
+        <p>CPU Usage: {{ result.cpu_usage }}</p>
+        <p>Memoria Usage: {{ result.memoria_usage }}</p>
+        <p>Almacenamiento Usage: {{ result.almacenamiento_usage }}</p>
+        <p>Transacciones: {{ result.transacciones }}</p>
+      </div>
+    </div>
+
+    
+  </div>
+
+  <canvas id="myChart"></canvas>
+  

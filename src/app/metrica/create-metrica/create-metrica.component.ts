@@ -38,6 +38,7 @@ export class CreateMetricaComponent {
     this.metricaService.addMetrica(this.metricaForm.value).subscribe(
       metrica => {
         this.metrica = metrica
+        console.log(this.metrica)
         this.router.navigate(['list/metrica'])
       }
     )

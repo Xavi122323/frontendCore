@@ -1,11 +1,13 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { MetricaService } from 'src/app/services/metrica.service';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-list-metrica',
   templateUrl: './list-metrica.component.html',
-  styleUrls: ['./list-metrica.component.scss']
+  styleUrls: ['./list-metrica.component.scss'],
+  providers: [DatePipe]
 })
 export class ListMetricaComponent {
 
@@ -13,7 +15,7 @@ export class ListMetricaComponent {
   servidorFilter: string | undefined;
   fechaRecoleccionFilter: string | undefined;
 
-  constructor(private metricaService: MetricaService, private router: Router) {}
+  constructor(private metricaService: MetricaService, private router: Router, private datePipe: DatePipe) {}
 
   ngOnInit(): void {
     this.metricaList();
@@ -37,7 +39,11 @@ export class ListMetricaComponent {
   metricaList(filters?: any) {
     this.metricaService.listMetricas(filters).subscribe(
       (metricas) => {
-        this.metricas = metricas;
+        // Use DatePipe to format each fechaRecoleccion
+        this.metricas = metricas.map((metrica: any) => ({
+          ...metrica,
+          fechaRecoleccion: this.datePipe.transform(metrica.fechaRecoleccion, 'yyyy-MM-dd HH:mm')
+        }));
       }
     );
   }

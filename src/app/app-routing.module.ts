@@ -21,6 +21,7 @@ import { UpdateMetricaComponent } from './metrica/update-metrica/update-metrica.
 import { UsoCPUComponent } from './consultas/uso-cpu/uso-cpu.component';
 import { UsoMemoriaComponent } from './consultas/uso-memoria/uso-memoria.component';
 import { TransaccionesBaseComponent } from './consultas/transacciones-base/transacciones-base.component';
+import { ComparacionServidoresComponent } from './consultas/comparacion-servidores/comparacion-servidores.component';
 
 const routes: Routes = [
   {path:'', component:SignInComponent},
@@ -41,7 +42,8 @@ const routes: Routes = [
   {path:'edit/metrica/:metricaID', component:UpdateMetricaComponent, canActivate:[AuthGuard]},
   {path:'consulta/usoCPU', component:UsoCPUComponent, canActivate:[AuthGuard]},
   {path:'consulta/usoMemoria', component:UsoMemoriaComponent, canActivate:[AuthGuard]},
-  {path:'consulta/transaccionesBase', component:TransaccionesBaseComponent, canActivate:[AuthGuard]}
+  {path:'consulta/transaccionesBase', component:TransaccionesBaseComponent, canActivate:[AuthGuard]},
+  {path:'consulta/comparacionServidores', component:ComparacionServidoresComponent, canActivate:[AuthGuard]}
 ];
 
 @NgModule({

@@ -153,4 +153,18 @@ export class ConsultasService {
     );
   }
 
+  compareServers(comparisonData: any): Observable<any> {
+    return this.http.post(this.url+'/api/v1/compare', comparisonData).pipe(
+      catchError((error) => {
+        let errorMessage = "Unexpected error occurred";
+        if (error.status === 404) {
+          errorMessage = "No data available for the given criteria";
+        } else if (error.status === 400) {
+          errorMessage = "Missing required parameters";
+        }
+        return throwError(() => new Error(errorMessage));
+      })
+    );
+  }
+
 }
