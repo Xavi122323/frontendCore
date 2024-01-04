@@ -27,8 +27,11 @@ export class CreateComponenteComponent implements OnInit {
 
   ngOnInit(): void {
     this.servidorService.listServidores().subscribe(
-      servidor => {
-        this.servidor = servidor;
+      response => {
+        this.servidor = response.servidores;
+      },
+      error => {
+        console.error('Error fetching servidores:', error);
       }
     )
   }

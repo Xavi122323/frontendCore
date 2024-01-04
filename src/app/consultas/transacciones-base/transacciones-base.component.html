@@ -1,0 +1,42 @@
+<div class="form-container">
+
+    <label>Seleccione un servidor:</label>
+    <div class="mb-3">
+      <select [(ngModel)]="selectedServer" (ngModelChange)="onServerSelectionChange()">
+      <option *ngFor="let server of servers" [value]="server.id">{{ server.nombre }}</option>
+      </select>
+    </div>
+
+    <label>Seleccione las bases:</label>
+    <div class="checkbox-container" *ngFor="let database of databaseNames">
+      <input type="checkbox" [id]="database.nombre" (change)="toggleDatabaseSelection(database.nombre)">
+      <label [for]="database.nombre">{{ database.nombre }}</label>
+    </div>
+
+    <label>Fecha de inicio:</label>
+    <input type="date" [(ngModel)]="startDate" placeholder="Start Date">
+    <label>Fecha de fin:</label>
+    <input type="date" [(ngModel)]="endDate" placeholder="End Date">
+    
+    <button (click)="onSearch()">Search</button>
+    
+    <button (click)="clearFilters()">Limpiar filtros</button>
+
+    <div *ngIf="averageTransactions !== null" class="average-transactions">
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title">Transacciones promedio</h5>
+            <p class="card-text">
+              Las transacciones promedio entre {{ startDate }} y {{ endDate }} son:
+              <strong>{{ averageTransactions | number:'1.1-2' }}</strong>
+            </p>
+          </div>
+        </div>
+    </div>
+    
+    <canvas id="myChart"></canvas>
+    
+    <div *ngIf="errorMessage" class="alert alert-warning">
+        <p class="error-message">{{ errorMessage }}</p>
+    </div>
+</div>

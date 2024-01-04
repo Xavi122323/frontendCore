@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { AuthenticatorService } from './authenticator.service';
 
@@ -12,13 +12,25 @@ export class ServidorService {
   //url:string = "https://corebackend.onrender.com";
   constructor(private http: HttpClient, private authService: AuthenticatorService) { }
 
-  listServidores(){
-    return this.http.get(this.url+'/api/v1/servidor');
-  }
-
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json'})
   };
+
+  /*listServidores(){
+    return this.http.get(this.url+'/api/v1/servidor');
+  }*/
+
+  listServidores(filters?: any): Observable<any> {
+    let params = new HttpParams();
+    if (filters) {
+      Object.keys(filters).forEach(key => {
+        if (filters[key] !== undefined) {
+          params = params.append(key, filters[key]);
+        }
+      });
+    }
+    return this.http.get(this.url + '/api/v1/servidor', { params });
+  }
 
   addServidor(data: any){
     return this.http.post(this.url+'/api/v1/servidor', data, this.authService.getHttpOptions())

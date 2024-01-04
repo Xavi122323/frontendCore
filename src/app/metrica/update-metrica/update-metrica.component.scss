@@ -1,0 +1,105 @@
+// Define color palette
+$white: #fff;
+$black: #000;
+$gray-light: #ccc;
+$gray-medium: #999;
+$gray-dark: #333;
+$primary-blue: #2196f3;
+
+// Global Styles
+body {
+  background-color: $white;
+  color: $black;
+  font-family: 'Arial', sans-serif;
+}
+
+// Utility Mixins
+@mixin label-style {
+  display: block;
+  margin-bottom: 0.5rem;
+  color: $gray-dark;
+  text-align: left; // Left-align the labels
+}
+
+@mixin input-style {
+  width: 100%;
+  padding: 0.5rem;
+  font-size: 1rem;
+  border: 1px solid $gray-light;
+  border-radius: 0.25rem;
+  margin-bottom: 1rem;
+
+  &:focus {
+    border-color: $primary-blue;
+    outline: none;
+    box-shadow: 0 0 0 0.2rem rgba($primary-blue, 0.25);
+  }
+}
+
+@mixin button-style {
+  padding: 0.625rem 0;
+  font-size: 1rem;
+  background-color: $primary-blue;
+  color: $white;
+  border: none;
+  border-radius: 0.25rem;
+  cursor: pointer;
+  width: 100%;
+  transition: background-color 0.2s, box-shadow 0.2s;
+
+  &:hover {
+    background-color: darken($primary-blue, 10%);
+    box-shadow: 0 2px 4px rgba($black, 0.2);
+  }
+
+  &:focus {
+    outline: none;
+    box-shadow: 0 0 0 0.2rem rgba($primary-blue, 0.5);
+  }
+}
+
+// Form Styles
+div {
+  margin-top: 2rem;
+  text-align: center;
+
+  h1 {
+    color: $gray-dark;
+  }
+
+  form {
+    width: 60%;
+    margin: 2rem auto;
+    background-color: $white;
+    padding: 2rem;
+    box-shadow: 0 4px 8px rgba($black, 0.1);
+    border-radius: 0.5rem;
+
+    .mb-3 {
+      margin-bottom: 1.5rem;
+    }
+
+    label {
+      @include label-style;
+    }
+
+    input, select {
+      @include input-style;
+    }
+
+    select {
+      cursor: pointer;
+    }
+
+    button {
+      @include button-style;
+    }
+  }
+}
+
+// Responsive Design
+@media (max-width: 768px) {
+  form {
+    width: 90%;
+  }
+}

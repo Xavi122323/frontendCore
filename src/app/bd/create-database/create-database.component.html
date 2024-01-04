@@ -1,0 +1,26 @@
+<div>
+    <h1>Agregar datos</h1>
+    <form [formGroup]="databaseForm" (ngSubmit)="onSubmit()">
+        <div class="mb-3">
+            <label for="nombre" class="form-label">Nombre</label>
+            <input type="text" class="form-control" id="nombre" formControlName="nombre">
+        </div>
+        <div class="mb-3">
+            <label for="transacciones" class="form-label">Transacciones</label>
+            <input type="number" class="form-control" id="transacciones" formControlName="transacciones">
+        </div>
+        <div class="mb-3">
+            <label for="fechaTransaccion" class="form-label">Fecha de transaccion</label>
+            <input type="date" class="form-control" id="fechaTransaccion" formControlName="fechaTransaccion">
+        </div>
+        <div class="mb-3">
+            <label for="servidor_id" class="form-label">Servidor</label>
+            <select class="form-control" id="servidor_id" formControlName="servidor_id">
+              <option *ngFor="let server of servidor" [value]="server.id">{{ server.nombre }}</option>
+            </select>
+        </div>
+        <div class="mb-3">
+            <button type="submit" class="btn btn-primary">Guardar datos</button>
+        </div>
+    </form>
+</div>

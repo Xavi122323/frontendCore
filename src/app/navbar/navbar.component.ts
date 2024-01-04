@@ -2,6 +2,7 @@ import { Component, OnDestroy } from '@angular/core';
 import { NavbarService } from '../services/navbar.service';
 import { Subscription } from 'rxjs';
 
+
 @Component({
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',

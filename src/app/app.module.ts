@@ -3,6 +3,8 @@ import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatButtonModule } from '@angular/material/button';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatPaginatorModule } from '@angular/material/paginator';
 
 import { AppRoutingModule } from './app-routing.module';
 import { ReactiveFormsModule, FormsModule} from '@angular/forms';
@@ -19,6 +21,17 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ListComponenteComponent } from './componente/list-componente/list-componente.component';
 import { CreateComponenteComponent } from './componente/create-componente/create-componente.component';
 import { UpdateComponenteComponent } from './componente/update-componente/update-componente.component';
+import { ListDatabaseComponent } from './bd/list-database/list-database.component';
+import { CreateDatabaseComponent } from './bd/create-database/create-database.component';
+import { UpdateDatabaseComponent } from './bd/update-database/update-database.component';
+import { ListMetricaComponent } from './metrica/list-metrica/list-metrica.component';
+import { CreateMetricaComponent } from './metrica/create-metrica/create-metrica.component';
+import { UpdateMetricaComponent } from './metrica/update-metrica/update-metrica.component';
+import { UsoCPUComponent } from './consultas/uso-cpu/uso-cpu.component';
+import { UsoMemoriaComponent } from './consultas/uso-memoria/uso-memoria.component';
+import { TransaccionesBaseComponent } from './consultas/transacciones-base/transacciones-base.component';
+import { ComparacionServidoresComponent } from './consultas/comparacion-servidores/comparacion-servidores.component';
+
 
 @NgModule({
   declarations: [
@@ -33,7 +46,17 @@ import { UpdateComponenteComponent } from './componente/update-componente/update
     NavbarComponent,
     ListComponenteComponent,
     CreateComponenteComponent,
-    UpdateComponenteComponent
+    UpdateComponenteComponent,
+    ListDatabaseComponent,
+    CreateDatabaseComponent,
+    UpdateDatabaseComponent,
+    ListMetricaComponent,
+    CreateMetricaComponent,
+    UpdateMetricaComponent,
+    UsoCPUComponent,
+    UsoMemoriaComponent,
+    TransaccionesBaseComponent,
+    ComparacionServidoresComponent
   ],
   imports: [
     BrowserModule,
@@ -43,7 +66,9 @@ import { UpdateComponenteComponent } from './componente/update-componente/update
     FormsModule,
     BrowserAnimationsModule,
     MatToolbarModule,
-    MatButtonModule
+    MatButtonModule,
+    MatMenuModule,
+    MatPaginatorModule
   ],
   providers: [],
   bootstrap: [AppComponent]

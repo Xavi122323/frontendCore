@@ -1,0 +1,132 @@
+// Define the color palette
+$white: #fff;
+$black: #000;
+$gray-light: #ccc;
+$gray-dark: #333;
+$primary-blue: #2196f3;
+$warning-yellow: #ffcc00;
+
+// Mixins for form elements and button styles
+@mixin form-element {
+  display: block;
+  width: calc(100% - 2rem); // Adjusting for padding
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  line-height: 1.5;
+  color: $black;
+  background-color: $white;
+  background-clip: padding-box;
+  border: 1px solid $gray-light;
+  border-radius: 0.25rem;
+  transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+
+  &:focus {
+    border-color: $primary-blue;
+    outline: 0;
+    box-shadow: 0 0 0 0.2rem rgba($primary-blue, 0.25);
+  }
+}
+
+@mixin button-style {
+  color: $white;
+  background-color: $primary-blue;
+  border-color: $primary-blue;
+  display: block; // Make the button block-level for easier centering
+  width: auto; // Allow the button to shrink to its content size
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  line-height: 1.5;
+  border-radius: 0.25rem;
+  transition: color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out;
+  margin: 1rem 0; // Space above and below the button
+  cursor: pointer;
+
+  &:hover {
+    background-color: darken($primary-blue, 10%);
+  }
+
+  &:focus {
+    box-shadow: 0 0 0 0.2rem rgba($primary-blue, 0.5);
+    outline: 0;
+  }
+}
+
+input[type="date"] {
+  display: block;
+  width: 20%;
+  padding: 0.5rem 1rem;
+  margin: 0 auto 1rem;
+  font-size: 1rem;
+  border: 1px solid $gray-light;
+  border-radius: 4px;
+}
+
+// Form container to control the maximum width and centering
+.form-container {
+  max-width: 600px;
+  margin: 0 auto;
+
+  .mb-3 {
+    margin-bottom: 1rem;
+
+    label {
+      display: block;
+      margin-bottom: .5rem;
+      color: $gray-dark;
+    }
+
+    select, input[type='date'] {
+      @include form-element;
+    }
+
+    input[type='date'] {
+      margin-bottom: 1rem; // Space between the date inputs and the button
+    }
+  }
+
+  button {
+    @include button-style;
+    text-align: center;
+  }
+
+  .average-cpu-usage {
+    .card {
+      background-color: $white;
+      border: 1px solid $gray-light;
+      border-radius: 0.25rem;
+      margin-top: 1rem;
+      padding: 1rem;
+
+      .card-body {
+        h5.card-title {
+          color: $gray-dark;
+          margin-bottom: 0.5rem;
+        }
+
+        .card-text {
+          color: $gray-light;
+        }
+      }
+    }
+  }
+
+  .alert {
+    background-color: $warning-yellow;
+    color: $black;
+    padding: 0.75rem 1rem;
+    margin-top: 1rem;
+    border-radius: 0.25rem;
+    text-align: center;
+  }
+}
+
+// Responsive adjustments for smaller screens
+@media (max-width: 768px) {
+  .form-container {
+    width: 90%; // adjust the form container width on smaller screens
+
+    .mb-3, input[type='date'], button {
+      width: calc(100% - 2rem); // adjust the width of elements within the form container
+    }
+  }
+}

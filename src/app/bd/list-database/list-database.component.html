@@ -1,0 +1,29 @@
+<h1>Lista de base de datos</h1>
+<input type="text" placeholder="Servidor" [(ngModel)]="servidorFilter" (input)="applyFilters()">
+<input type="text" placeholder="Nombre" [(ngModel)]="nombreFilter" (input)="applyFilters()">
+<input type="date" [(ngModel)]="fechaRecoleccionFilter" (input)="applyFilters()">
+<table class="table">
+    <thead>
+      <tr>
+        <th scope="col">Nombre</th>
+        <th scope="col">Transacciones</th>
+        <th scope="col">Fecha de transaccion</th>
+        <th scope="col">Servidor</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let database of databases">
+        <td>{{database.nombre}}</td>
+        <td>{{database.transacciones}}</td>
+        <td>{{database.fechaTransaccion}}</td>
+        <td>{{database.server_name}}</td>
+        <td><button class="btn btn-success" (click)="editDatabase(database.id)">Editar</button> | <button class="btn btn-danger" (click)="deleteDatabase(database.id)">Eliminar</button></td>
+      </tr>
+    </tbody>
+</table>
+<mat-paginator [length]="length"
+               [pageSize]="pageSize"
+               [pageSizeOptions]="pageSizeOptions"
+               (page)="handlePageEvent($event)">
+</mat-paginator>
+<button class="btn btn-info" (click)="createDatabase()">Agregar base de datos</button>

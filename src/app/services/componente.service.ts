@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { AuthenticatorService } from './authenticator.service';
 
@@ -13,8 +13,22 @@ export class ComponenteService {
 
   constructor(private http: HttpClient, private authService: AuthenticatorService) { }
 
-  listComponentes(){
-    return this.http.get(this.url+'/api/v1/componente');
+  listComponentes(filters?: any): Observable<any> {
+    let params = new HttpParams();
+    if (filters) {
+      Object.keys(filters).forEach(key => {
+        params = params.append(key, filters[key]);
+      });
+    }
+
+    if (filters.page) {
+      params = params.append('page', filters.page.toString());
+    }
+    if (filters.limit) {
+      params = params.append('limit', filters.limit.toString());
+    }
+    
+    return this.http.get(this.url + '/api/v1/componente', { params });
   }
 
   httpOptions = {

@@ -1,0 +1,30 @@
+<div>
+    <h1>Editar datos</h1>
+    <form *ngIf="metricaForm" [formGroup]="metricaForm" (ngSubmit)="onSubmit()">
+        <div class="mb-3">
+            <label for="usoCPU" class="form-label">Uso de CPU</label>
+            <input type="number" class="form-control" id="usoCPU" formControlName="usoCPU">
+        </div>
+        <div class="mb-3">
+            <label for="usoMemoria" class="form-label">Uso de Memoria</label>
+            <input type="number" class="form-control" id="usoMemoria" formControlName="usoMemoria">
+        </div>
+        <div class="mb-3">
+            <label for="usoAlmacenamiento" class="form-label">Uso de Almacenamiento</label>
+            <input type="number" class="form-control" id="usoAlmacenamiento" formControlName="usoAlmacenamiento">
+        </div>
+        <div class="mb-3">
+            <label for="fechaRecoleccion" class="form-label">Fecha de Recoleccion</label>
+            <input type="datetime-local" class="form-control" id="fechaRecoleccion" formControlName="fechaRecoleccion">
+        </div>
+        <div class="mb-3">
+            <label for="servidor_id" class="form-label">Servidor</label>
+            <select class="form-control" id="servidor_id" formControlName="servidor_id">
+              <option *ngFor="let server of servidor" [value]="server.id">{{ server.nombre }}</option>
+            </select>
+        </div>
+        <div class="mb-3">
+            <button type="submit" class="btn btn-primary">Guardar datos</button>
+        </div>
+    </form>
+</div>
