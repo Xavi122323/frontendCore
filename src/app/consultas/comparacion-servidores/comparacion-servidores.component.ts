@@ -18,15 +18,20 @@ export class ComparacionServidoresComponent {
   servidor: any;
   errorMessage: string = '';
   chart: Chart | null = null;
+  summary: any = null;
+  serverComparisons: any = null;
 
   constructor(private consultasService: ConsultasService, private servidorService: ServidorService) { }
 
   ngOnInit(): void {
     this.servidorService.listServidores().subscribe(
-      servidor => {
-        this.servidor = servidor;
+      response => {
+        this.servidor = response.servidores;
+      },
+      error => {
+        console.error('Error fetching servidores:', error);
       }
-    )
+    );
   }
 
   onSubmit() {
@@ -42,7 +47,9 @@ export class ComparacionServidoresComponent {
     this.consultasService.compareServers(comparisonData)
       .subscribe({
         next: (data) => {
-          this.comparisonResults = data;
+          this.comparisonResults = data.comparison_results;
+          this.summary = data.summary;
+          this.serverComparisons = data.server_comparisons;
           this.errorMessage = '';
           this.createChart(this.comparisonResults);
         },

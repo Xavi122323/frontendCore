@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
-import { Observable, map } from 'rxjs';
+import { Observable, catchError, map, of } from 'rxjs';
 import { AuthenticatorService } from './authenticator.service';
 
 @Injectable({
@@ -17,10 +17,6 @@ export class DatabaseService {
     headers: new HttpHeaders({ 'Content-Type': 'application/json'})
   }
 
-  /*listDatabase(): Observable<any>{
-    return this.http.get(this.url+'/api/v1/database', this.authService.getHttpOptions())
-  }*/
-
   listDatabase(filters?: any): Observable<any> {
     let params = new HttpParams();
     if (filters) {
@@ -28,13 +24,32 @@ export class DatabaseService {
         params = params.append(key, filters[key]);
       });
     }
+
+    if (filters.page) {
+      params = params.append('page', filters.page.toString());
+    }
+    if (filters.limit) {
+      params = params.append('limit', filters.limit.toString());
+    }
+    
     return this.http.get(this.url + '/api/v1/database', { params });
   }
 
-  listUniqueDatabaseNames(): Observable<string[]> {
-    return this.http.get<string[]>(`${this.url}/api/v1/database`, {
-      params: new HttpParams().set('unique_names', 'true')
-    });
+  listUniqueDatabaseNames(servidorId?: number): Observable<{ nombre: string, server_id: number }[]> {
+    let params = new HttpParams();
+    params = params.set('unique_names', 'true');
+  
+    if (servidorId != null) {
+      params = params.set('servidor_id', servidorId.toString());
+    }
+  
+    return this.http.get<{ nombre: string, server_id: number }[]>(`${this.url}/api/v1/database`, { params })
+      .pipe(
+        catchError(error => {
+          // Handle errors as appropriate
+          return of([]);
+        })
+      );
   }
 
   addDatabase(data: any): Observable<any>{

@@ -35,8 +35,11 @@ export class UpdateDatabaseComponent {
       }
     );
     this.servidorService.listServidores().subscribe(
-      servidor => {
-        this.servidor = servidor;
+      response => {
+        this.servidor = response.servidores;
+      },
+      error => {
+        console.error('Error fetching servidores:', error);
       }
     );
   }

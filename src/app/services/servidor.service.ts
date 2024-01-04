@@ -24,7 +24,9 @@ export class ServidorService {
     let params = new HttpParams();
     if (filters) {
       Object.keys(filters).forEach(key => {
-        params = params.append(key, filters[key]);
+        if (filters[key] !== undefined) {
+          params = params.append(key, filters[key]);
+        }
       });
     }
     return this.http.get(this.url + '/api/v1/servidor', { params });

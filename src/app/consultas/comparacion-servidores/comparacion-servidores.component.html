@@ -28,8 +28,11 @@
   
       <button type="submit" class="btn btn-primary">Comparar</button>
     </form>
-  
-    <div *ngIf="errorMessage" class="error-message">{{ errorMessage }}</div>
+
+    <div *ngIf="errorMessage" class="alert alert-warning">
+      <p class="error-message">{{ errorMessage }}</p>
+    </div>
+
     <div *ngIf="comparisonResults">
       <h2>Resultados de la Comparación:</h2>
       <div *ngFor="let result of comparisonResults">
@@ -41,8 +44,29 @@
       </div>
     </div>
 
+    <div *ngIf="summary">
+      <h2>Sumario:</h2>
+      <p>Servidor con mas transacciones: {{ summary.most_transactions.server_name }} ( {{ summary.most_transactions.transaction_count }} transacciones )</p>
+      <p>Servidores en orden de peor uso de memoria:</p>
+      <ul>
+        <li *ngFor="let server of summary.least_efficient_memory">
+          {{ server.server_name }}: {{ server.average_memory_usage }}
+        </li>
+      </ul>
+    </div>
     
-  </div>
-
+    <div *ngIf="serverComparisons && serverComparisons.length > 0">
+      <h2>Comparación de servidores:</h2>
+      <div *ngFor="let comparison of serverComparisons">
+        <h3>Comparación de: {{ comparison.server1 }} vs {{ comparison.server2 }}</h3>
+        <p>Diferencia de transacciones: {{ comparison.transaction_difference }}</p>
+        <p>Diferencia de uso de memoria: {{ comparison.memory_difference }}</p>
+      </div>
+    </div>
+    
+</div>
+<div class="chart">
   <canvas id="myChart"></canvas>
-  
+</div>
+
+

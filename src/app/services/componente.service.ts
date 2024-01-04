@@ -13,10 +13,6 @@ export class ComponenteService {
 
   constructor(private http: HttpClient, private authService: AuthenticatorService) { }
 
-  /*listComponentes(){
-    return this.http.get(this.url+'/api/v1/componente');
-  }*/
-
   listComponentes(filters?: any): Observable<any> {
     let params = new HttpParams();
     if (filters) {
@@ -24,6 +20,14 @@ export class ComponenteService {
         params = params.append(key, filters[key]);
       });
     }
+
+    if (filters.page) {
+      params = params.append('page', filters.page.toString());
+    }
+    if (filters.limit) {
+      params = params.append('limit', filters.limit.toString());
+    }
+    
     return this.http.get(this.url + '/api/v1/componente', { params });
   }
 

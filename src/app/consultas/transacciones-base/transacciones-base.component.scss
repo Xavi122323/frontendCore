@@ -9,7 +9,7 @@ $warning-yellow: #ffcc00;
 // Mixins for form elements and button styles
 @mixin form-element {
   display: block;
-  width: calc(100% - 2rem); // Adjusting for padding
+  width: 100%;
   padding: 0.5rem 1rem;
   font-size: 1rem;
   line-height: 1.5;
@@ -31,14 +31,15 @@ $warning-yellow: #ffcc00;
   color: $white;
   background-color: $primary-blue;
   border-color: $primary-blue;
-  display: block; // Make the button block-level for easier centering
-  width: auto; // Allow the button to shrink to its content size
+  display: block;
+  width: fit-content;
   padding: 0.5rem 1rem;
   font-size: 1rem;
   line-height: 1.5;
   border-radius: 0.25rem;
   transition: color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out;
   cursor: pointer;
+  margin: 1rem auto;
 
   &:hover {
     background-color: darken($primary-blue, 10%);
@@ -52,7 +53,7 @@ $warning-yellow: #ffcc00;
 
 // Form container styles
 .form-container {
-  max-width: 600px;
+  max-width: 700px;
   margin: 0 auto;
   padding: 1rem;
 
@@ -71,39 +72,20 @@ $warning-yellow: #ffcc00;
     }
   }
 
-  // Margin bottom style
-  .mb-3 {
-    margin-bottom: 1rem;
-  }
-
   // Select dropdown and date inputs styles
-  select{
+  select, input[type="date"] {
     @include form-element;
-    margin-bottom: 0.5rem; // Space between elements
-  }
-
-  input[type="date"] {
-    display: block;
-    width: 20%;
-    padding: 0.5rem 1rem;
-    margin: 0 auto 1rem;
-    font-size: 1rem;
-    border: 1px solid $gray-light;
-    border-radius: 4px;
+    margin-bottom: 0.5rem;
   }
 
   // Button styles
   button {
     @include button-style;
-    margin-top: 1rem; // Space above the button
   }
 
   // Canvas for chart
-  #myChart {
-    max-width: 600px; // Adjust as needed
-    margin: 1rem auto; // Center the canvas
-  }
 
+  // Alert styles
   .alert {
     background-color: $warning-yellow;
     color: $black;
@@ -112,38 +94,27 @@ $warning-yellow: #ffcc00;
     border-radius: 0.25rem;
     text-align: center;
   }
+}
 
-  .average-transactions {
-    .card {
-      background-color: $white;
-      border: 1px solid $gray-light;
-      border-radius: 0.25rem;
-      margin-top: 1rem;
-      padding: 1rem;
-
-      .card-body {
-        h5.card-title {
-          color: $gray-dark;
-          margin-bottom: 0.5rem;
-        }
-
-        .card-text {
-          color: $gray-light;
-        }
-      }
-    }
-  }
+.chart {
+  max-width: 700px;
+  margin: 0 auto;
+  padding: 1rem;
 }
 
 // Responsive adjustments
 @media (max-width: 768px) {
   .form-container {
-    select, input[type="date"] {
-      width: calc(100% - 2rem); // Adjust for mobile
+    width: 90%;
+
+    select, input[type="date"], button {
+      width: 100%;
+      margin-bottom: 1rem;
     }
 
     #myChart {
-      width: calc(100% - 2rem); // Adjust for mobile
+      width: 100%;
+      height: auto;
     }
   }
 }

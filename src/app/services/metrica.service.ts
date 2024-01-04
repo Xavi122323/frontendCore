@@ -28,6 +28,14 @@ export class MetricaService {
         params = params.append(key, filters[key]);
       });
     }
+
+    if (filters.page) {
+      params = params.append('page', filters.page.toString());
+    }
+    if (filters.limit) {
+      params = params.append('limit', filters.limit.toString());
+    }
+
     return this.http.get(this.url + '/api/v1/metrica', { params });
   }
 

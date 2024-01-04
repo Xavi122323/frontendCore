@@ -24,6 +24,8 @@ export class TransaccionesBaseComponent implements OnInit{
   errorMessage: string = '';
   chart: Chart | null = null;
   averageTransactions: number | null = null;
+  allDatabaseNames: any[] = [];
+  filterdatabases: any[] = [];
 
   constructor(private consultasService: ConsultasService, private servidorService: ServidorService, private databaseService: DatabaseService) { }
 
@@ -32,13 +34,29 @@ export class TransaccionesBaseComponent implements OnInit{
     this.fetchServers();
   }
 
-  fetchDatabaseNames() {
-    this.databaseService.listUniqueDatabaseNames().subscribe(
+  fetchDatabaseNames(servidorId?: number) {
+    this.databaseService.listUniqueDatabaseNames(servidorId).subscribe(
       data => {
-        this.databaseNames = data.map(nombre => ({ nombre }));
+        this.allDatabaseNames = data;
+        this.filterDatabasesByServer();
       },
       error => console.error('Error fetching unique database names', error)
     );
+  }
+
+  onServerSelectionChange() {
+    console.log('Server selection changed:', this.selectedServer);
+    this.filterDatabasesByServer();
+  }
+  
+  filterDatabasesByServer() {
+    if (this.selectedServer !== undefined) {  // Check that selectedServer is not undefined
+      this.databaseNames = this.allDatabaseNames.filter(database => 
+        database.server_id === Number(this.selectedServer)  // Ensure both are of the same type
+      );
+    } else {
+      this.databaseNames = [...this.allDatabaseNames];
+    }
   }
 
   toggleDatabaseSelection(nombre: string) {
@@ -51,7 +69,7 @@ export class TransaccionesBaseComponent implements OnInit{
 
   fetchServers() {
     this.servidorService.listServidores().subscribe(
-      data => this.servers = data,
+      data => this.servers = data.servidores,
       error => console.error('Error fetching servers', error)
     );
   }
@@ -98,6 +116,7 @@ export class TransaccionesBaseComponent implements OnInit{
     this.selectedServer = undefined;
     this.startDate = undefined;
     this.endDate = undefined;
+    this.fetchDatabaseNames();
   }
 
   createChart(metricaData: any[]) {

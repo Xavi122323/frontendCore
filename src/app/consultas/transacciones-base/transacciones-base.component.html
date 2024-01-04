@@ -1,16 +1,21 @@
 <div class="form-container">
-    <div class="checkbox-container" *ngFor="let database of databaseNames">
-        <input type="checkbox" [id]="database.nombre" (change)="toggleDatabaseSelection(database.nombre)">
-        <label [for]="database.nombre">{{ database.nombre }}</label>
-    </div>
 
+    <label>Seleccione un servidor:</label>
     <div class="mb-3">
-        <select [(ngModel)]="selectedServer">
-        <option *ngFor="let server of servers" [value]="server.id">{{ server.nombre }}</option>
-        </select>
+      <select [(ngModel)]="selectedServer" (ngModelChange)="onServerSelectionChange()">
+      <option *ngFor="let server of servers" [value]="server.id">{{ server.nombre }}</option>
+      </select>
     </div>
 
+    <label>Seleccione las bases:</label>
+    <div class="checkbox-container" *ngFor="let database of databaseNames">
+      <input type="checkbox" [id]="database.nombre" (change)="toggleDatabaseSelection(database.nombre)">
+      <label [for]="database.nombre">{{ database.nombre }}</label>
+    </div>
+
+    <label>Fecha de inicio:</label>
     <input type="date" [(ngModel)]="startDate" placeholder="Start Date">
+    <label>Fecha de fin:</label>
     <input type="date" [(ngModel)]="endDate" placeholder="End Date">
     
     <button (click)="onSearch()">Search</button>

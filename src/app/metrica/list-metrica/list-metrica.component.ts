@@ -1,7 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild, AfterViewInit} from '@angular/core';
 import { Router } from '@angular/router';
 import { MetricaService } from 'src/app/services/metrica.service';
 import { DatePipe } from '@angular/common';
+import { MatPaginator, PageEvent } from '@angular/material/paginator';
 
 @Component({
   selector: 'app-list-metrica',
@@ -9,23 +10,23 @@ import { DatePipe } from '@angular/common';
   styleUrls: ['./list-metrica.component.scss'],
   providers: [DatePipe]
 })
-export class ListMetricaComponent {
+export class ListMetricaComponent implements AfterViewInit {
 
   metricas: any;
   servidorFilter: string | undefined;
   fechaRecoleccionFilter: string | undefined;
 
+  length = 100;
+  pageSize = 10;
+  pageSizeOptions: number[] = [5, 10, 25, 100];
+
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
+
   constructor(private metricaService: MetricaService, private router: Router, private datePipe: DatePipe) {}
 
-  ngOnInit(): void {
+  ngAfterViewInit(): void {
     this.metricaList();
   }
-
-  /*metricaList(){
-    this.metricaService.listMetricas().subscribe((data) => {
-      this.metricas = data;
-    })
-  }*/
 
   applyFilters() {
     const filters: {servidor?: string, fechaRecoleccion?: string} = {};
@@ -36,17 +37,42 @@ export class ListMetricaComponent {
     this.metricaList(filters);
   }
 
-  metricaList(filters?: any) {
+  handlePageEvent(event: PageEvent) {
+    const pageIndex = event.pageIndex;
+    const pageSize = event.pageSize;
+
+    this.metricaList({ pageIndex, pageSize });
+  }
+
+  metricaList(filters: any = {}) {
+    if (this.paginator) {
+      filters.page = this.paginator.pageIndex + 1;
+      filters.limit = this.paginator.pageSize;
+    } else {
+      filters.page = 1;
+      filters.limit = this.pageSize;
+    }
+  
     this.metricaService.listMetricas(filters).subscribe(
-      (metricas) => {
-        // Use DatePipe to format each fechaRecoleccion
-        this.metricas = metricas.map((metrica: any) => ({
+      (response) => {
+        this.length = response.total_count;
+
+        this.metricas = response.metricas.map((metrica: { fechaRecoleccion: string | number | Date; }) => ({
           ...metrica,
           fechaRecoleccion: this.datePipe.transform(metrica.fechaRecoleccion, 'yyyy-MM-dd HH:mm')
         }));
+
+        if (this.paginator) {
+          this.paginator.pageIndex = filters.page - 1;
+          this.paginator.pageSize = filters.limit;
+        }
+      },
+      error => {
+        console.error('Error fetching metricas:', error);
       }
     );
   }
+  
 
   deleteMetrica(id: any){
     this.metricaService.deleteMetrica(id).subscribe(
