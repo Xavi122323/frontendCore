@@ -12,7 +12,7 @@ export class AdminRoleService {
   constructor(private http: HttpClient,private authService: AuthenticatorService) { }
 
   listUsers(){
-    return this.http.get(this.url+'/api/v1/admin_role', this.authService.getHttpOptions());
+    return this.http.get(this.url+'/api/v1/admin_role');
   }
 
   findUser(id: any){
@@ -20,10 +20,10 @@ export class AdminRoleService {
   }
 
   editUser(data:any, id:any){
-    return this.http.put(this.url+'/api/v1/admin_role/'+id,  data, this.authService.getHttpOptions())
+    return this.http.put(this.url+'/api/v1/admin_role/'+id,  data)
   }
 
   deleteUser(id: any){
-    return this.http.delete(this.url+'/api/v1/admin_role/'+id, this.authService.getHttpOptions())
+    return this.http.delete(this.url+'/api/v1/admin_role/'+id)
   }
 }

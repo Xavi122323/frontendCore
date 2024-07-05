@@ -1,6 +1,6 @@
-import { NgModule } from '@angular/core';
+import { NgModule, APP_INITIALIZER } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatButtonModule } from '@angular/material/button';
 import { MatMenuModule } from '@angular/material/menu';
@@ -31,6 +31,9 @@ import { UsoCPUComponent } from './consultas/uso-cpu/uso-cpu.component';
 import { UsoMemoriaComponent } from './consultas/uso-memoria/uso-memoria.component';
 import { TransaccionesBaseComponent } from './consultas/transacciones-base/transacciones-base.component';
 import { ComparacionServidoresComponent } from './consultas/comparacion-servidores/comparacion-servidores.component';
+import { KeycloakAngularModule, KeycloakService } from 'keycloak-angular';
+import { initializeKeycloak } from './keycloak.config';
+import { AuthInterceptor } from './auth.interceptor';
 
 
 @NgModule({
@@ -68,9 +71,21 @@ import { ComparacionServidoresComponent } from './consultas/comparacion-servidor
     MatToolbarModule,
     MatButtonModule,
     MatMenuModule,
-    MatPaginatorModule
+    MatPaginatorModule,
+    KeycloakAngularModule
   ],
-  providers: [],
+  providers: [
+  {
+    provide: APP_INITIALIZER,
+    useFactory: initializeKeycloak,
+    multi: true,
+    deps: [KeycloakService]
+  },
+  {
+    provide: HTTP_INTERCEPTORS,
+    useClass: AuthInterceptor,
+    multi: true
+  }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

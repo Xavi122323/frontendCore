@@ -33,7 +33,7 @@ export class ServidorService {
   }
 
   addServidor(data: any){
-    return this.http.post(this.url+'/api/v1/servidor', data, this.authService.getHttpOptions())
+    return this.http.post(this.url+'/api/v1/servidor', data)
   }
 
   findServidor(id: any){
@@ -41,11 +41,11 @@ export class ServidorService {
   }
 
   editServidor(data:any, id:any){
-    return this.http.put(this.url+'/api/v1/servidor/'+id,  data, this.authService.getHttpOptions())
+    return this.http.put(this.url+'/api/v1/servidor/'+id,  data)
   }
 
   deleteServidor(id: any){
-    return this.http.delete(this.url+'/api/v1/servidor/'+id, this.authService.getHttpOptions())
+    return this.http.delete(this.url+'/api/v1/servidor/'+id)
   }
 
 }

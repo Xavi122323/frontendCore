@@ -36,7 +36,7 @@ export class ComponenteService {
   };
 
   addComponente(data: any){
-    return this.http.post(this.url+'/api/v1/componente', data, this.authService.getHttpOptions());
+    return this.http.post(this.url+'/api/v1/componente', data);
   }
 
   findComponente(id: any){
@@ -44,10 +44,10 @@ export class ComponenteService {
   }
 
   editComponente(data:any, id:any){
-    return this.http.put(this.url+'/api/v1/componente/'+id,  data, this.authService.getHttpOptions());
+    return this.http.put(this.url+'/api/v1/componente/'+id,  data);
   }
 
   deleteComponente(id: any){
-    return this.http.delete(this.url+'/api/v1/componente/'+id, this.authService.getHttpOptions());
+    return this.http.delete(this.url+'/api/v1/componente/'+id);
   }
 }

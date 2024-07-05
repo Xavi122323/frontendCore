@@ -53,11 +53,11 @@ export class DatabaseService {
   }
 
   addDatabase(data: any): Observable<any>{
-    return this.http.post(this.url+'/api/v1/database', data, this.authService.getHttpOptions())
+    return this.http.post(this.url+'/api/v1/database', data)
   }
 
   deleteDatabase(id: any): Observable<any>{
-    return this.http.delete(this.url+'/api/v1/database/'+id, this.authService.getHttpOptions())
+    return this.http.delete(this.url+'/api/v1/database/'+id)
   }
 
   findDatabase(id: any): Observable<any>{
@@ -65,6 +65,6 @@ export class DatabaseService {
   }
 
   editDatabase(data: any, id: any): Observable<any>{
-    return this.http.put(this.url+'/api/v1/database/'+id, data, this.authService.getHttpOptions())
+    return this.http.put(this.url+'/api/v1/database/'+id, data)
   }
 }

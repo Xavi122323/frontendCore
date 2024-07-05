@@ -1,7 +1,5 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { AuthenticatorService } from 'src/app/services/authenticator.service';
-import { Router } from '@angular/router';
+import { Component, OnInit } from '@angular/core';
+import { KeycloakService } from 'keycloak-angular';
 import { NavbarService } from 'src/app/services/navbar.service';
 
 @Component({
@@ -9,45 +7,15 @@ import { NavbarService } from 'src/app/services/navbar.service';
   templateUrl: './sign-in.component.html',
   styleUrls: ['./sign-in.component.scss']
 })
-export class SignInComponent implements OnInit, OnDestroy{
+export class SignInComponent implements OnInit {
 
-  constructor(private authenticatorService: AuthenticatorService, private router: Router, private navbarService: NavbarService)
-  {
-    localStorage.clear();
-  }
-
-  user: any;
-  responseData: any;
-
-  userForm = new FormGroup({
-    email: new FormControl("", Validators.required),
-    password: new FormControl("", Validators.required)
-  })
-
-  onSubmit(): void {
-    this.authenticatorService.proceedLogin(this.userForm.value.email, this.userForm.value.password)
-      .subscribe(
-        result =>{
-          if(result != null){
-            this.responseData = result;
-            localStorage.setItem('token',this.responseData)
-            this.router.navigate(['list/server']);
-          }
-        }
-      );
-  }
-
-  registerRoute(){
-    this.router.navigate(['register/user']);
-  }
+  constructor(private keycloakService: KeycloakService, private navbarService: NavbarService) { }
 
   ngOnInit(): void {
-      this.navbarService.hide();
-      localStorage.removeItem('token');
+    this.navbarService.hide();
   }
 
-  ngOnDestroy(): void {
-      this.navbarService.display();
+  login(): void {
+    this.keycloakService.login();
   }
-
 }

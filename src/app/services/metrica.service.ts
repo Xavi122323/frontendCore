@@ -40,7 +40,7 @@ export class MetricaService {
   }
 
   addMetrica(data: any): Observable<any>{
-    return this.http.post(this.url+'/api/v1/metrica', data, this.authService.getHttpOptions())
+    return this.http.post(this.url+'/api/v1/metrica', data)
   }
 
   findMetrica(id: any): Observable<any>{
@@ -48,10 +48,10 @@ export class MetricaService {
   }
 
   editMetrica(data: any, id: any): Observable<any>{
-    return this.http.put(this.url+'/api/v1/metrica/'+id, data, this.authService.getHttpOptions())
+    return this.http.put(this.url+'/api/v1/metrica/'+id, data)
   }
 
   deleteMetrica(id: any){
-    return this.http.delete(this.url+'/api/v1/metrica/'+id, this.authService.getHttpOptions())
+    return this.http.delete(this.url+'/api/v1/metrica/'+id)
   }
 }

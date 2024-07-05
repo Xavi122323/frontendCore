@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
+import { KeycloakService } from 'keycloak-angular';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -7,42 +8,23 @@ import { Observable } from 'rxjs';
 })
 export class AuthenticatorService {
 
-  //url:string = "http://127.0.0.1:3000";
-  url:string = "https://corebackend.onrender.com";
-  constructor(private http: HttpClient) { }
+  private baseUrl: string = 'https://corebackend.onrender.com';
 
-  proceedLogin(email: any, password: any){
-    const body = {
-      user: {
-        email: email,
-        password: password,
-      },
-    };
-    return this.http.post(this.url+'/api/v1/sign_in', body)
+  constructor(private http: HttpClient, private keycloakService: KeycloakService) { }
+
+  isLoggedIn(): boolean {
+    return this.keycloakService.isLoggedIn();
   }
 
-  registerLogin(email: any, password: any){
-    const body = {
-      user: {
-        email: email,
-        password: password,
-      },
-    };
-    return this.http.post(this.url+'/api/v1/sign_up', body)
+  getToken(): Promise<string> {
+    return this.keycloakService.getToken();
   }
 
-  isLoggedIn(){
-    return localStorage.getItem('token')!=null;
+  getProtectedData(): Observable<any> {
+    return this.http.get(`${this.baseUrl}/api/v1/protected`);
   }
 
-  getHttpOptions() {
-    const token = localStorage.getItem('token');
-    const httpOptions = {
-      headers: new HttpHeaders({
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${token}`
-      })
-    };
-    return httpOptions;
+  logout(): void {
+    this.keycloakService.logout();
   }
 }

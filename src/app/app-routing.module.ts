@@ -5,10 +5,9 @@ import { CreateServidorComponent } from './servidor/create-servidor/create-servi
 import { EditServidorComponent } from './servidor/edit-servidor/edit-servidor.component';
 import { SignInComponent } from './auth/sign-in/sign-in.component';
 import { RegisterComponent } from './auth/register/register.component';
-import { AuthenticatorService } from './services/authenticator.service';
+import { AuthGuard } from './auth.guard';
 import { ListUsersComponent } from './admin_role/list-users/list-users.component';
 import { UpdateUserComponent } from './admin_role/update-user/update-user.component';
-import { AuthGuard } from './auth.guard';
 import { ListComponenteComponent } from './componente/list-componente/list-componente.component';
 import { CreateComponenteComponent } from './componente/create-componente/create-componente.component';
 import { UpdateComponenteComponent } from './componente/update-componente/update-componente.component';
@@ -24,26 +23,26 @@ import { TransaccionesBaseComponent } from './consultas/transacciones-base/trans
 import { ComparacionServidoresComponent } from './consultas/comparacion-servidores/comparacion-servidores.component';
 
 const routes: Routes = [
-  {path:'', component:SignInComponent},
-  {path:'register/user', component:RegisterComponent},
-  {path:'list/server', component:ListServidoresComponent, canActivate:[AuthGuard]},
-  {path:'create/server', component:CreateServidorComponent, canActivate:[AuthGuard]},
-  {path:'edit/server/:serverID', component:EditServidorComponent, canActivate:[AuthGuard]},
-  {path:'list/user', component:ListUsersComponent, canActivate:[AuthGuard]},
-  {path:'edit/user/:userID', component:UpdateUserComponent, canActivate:[AuthGuard]},
-  {path:'list/componente', component:ListComponenteComponent, canActivate:[AuthGuard]},
-  {path:'create/componente', component:CreateComponenteComponent, canActivate:[AuthGuard]},
-  {path:'edit/componente/:componenteID', component:UpdateComponenteComponent, canActivate:[AuthGuard]},
-  {path:'list/database', component:ListDatabaseComponent, canActivate:[AuthGuard]},
-  {path:'create/database', component:CreateDatabaseComponent, canActivate:[AuthGuard]},
-  {path:'edit/database/:databaseID', component:UpdateDatabaseComponent, canActivate:[AuthGuard]},
-  {path:'list/metrica', component:ListMetricaComponent, canActivate:[AuthGuard]},
-  {path:'create/metrica', component:CreateMetricaComponent, canActivate:[AuthGuard]},
-  {path:'edit/metrica/:metricaID', component:UpdateMetricaComponent, canActivate:[AuthGuard]},
-  {path:'consulta/usoCPU', component:UsoCPUComponent, canActivate:[AuthGuard]},
-  {path:'consulta/usoMemoria', component:UsoMemoriaComponent, canActivate:[AuthGuard]},
-  {path:'consulta/transaccionesBase', component:TransaccionesBaseComponent, canActivate:[AuthGuard]},
-  {path:'consulta/comparacionServidores', component:ComparacionServidoresComponent, canActivate:[AuthGuard]}
+  { path: '', component: ListServidoresComponent },
+  { path: 'list/server', component: ListServidoresComponent, canActivate: [AuthGuard] },
+  { path: 'create/server', component: CreateServidorComponent, canActivate: [AuthGuard] },
+  { path: 'edit/server/:serverID', component: EditServidorComponent, canActivate: [AuthGuard] },
+  { path: 'list/user', component: ListUsersComponent, canActivate: [AuthGuard] },
+  { path: 'edit/user/:userID', component: UpdateUserComponent, canActivate: [AuthGuard] },
+  { path: 'list/componente', component: ListComponenteComponent, canActivate: [AuthGuard] },
+  { path: 'create/componente', component: CreateComponenteComponent, canActivate: [AuthGuard] },
+  { path: 'edit/componente/:componenteID', component: UpdateComponenteComponent, canActivate: [AuthGuard] },
+  { path: 'list/database', component: ListDatabaseComponent, canActivate: [AuthGuard] },
+  { path: 'create/database', component: CreateDatabaseComponent, canActivate: [AuthGuard] },
+  { path: 'edit/database/:databaseID', component: UpdateDatabaseComponent, canActivate: [AuthGuard] },
+  { path: 'list/metrica', component: ListMetricaComponent, canActivate: [AuthGuard] },
+  { path: 'create/metrica', component: CreateMetricaComponent, canActivate: [AuthGuard] },
+  { path: 'edit/metrica/:metricaID', component: UpdateMetricaComponent, canActivate: [AuthGuard] },
+  { path: 'consulta/usoCPU', component: UsoCPUComponent, canActivate: [AuthGuard] },
+  { path: 'consulta/usoMemoria', component: UsoMemoriaComponent, canActivate: [AuthGuard] },
+  { path: 'consulta/transaccionesBase', component: TransaccionesBaseComponent, canActivate: [AuthGuard] },
+  { path: 'consulta/comparacionServidores', component: ComparacionServidoresComponent, canActivate: [AuthGuard] },
+  { path: '**', redirectTo: '', pathMatch: 'full' }
 ];
 
 @NgModule({
