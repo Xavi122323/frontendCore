@@ -6,7 +6,7 @@ export function initializeKeycloak(keycloak: KeycloakService) {
       config: {
         url: 'https://cloak.mindsoftdev.com:8443',
         realm: 'external',
-        clientId: 'ruby-client-front-test'
+        clientId: 'ruby-client-front-prod'
       },
       initOptions: {
         onLoad: 'login-required'
