@@ -1,6 +1,6 @@
 import { NgModule, APP_INITIALIZER } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatButtonModule } from '@angular/material/button';
 import { MatMenuModule } from '@angular/material/menu';
@@ -36,56 +36,51 @@ import { initializeKeycloak } from './keycloak.config';
 import { AuthInterceptor } from './auth.interceptor';
 
 
-@NgModule({
-  declarations: [
-    AppComponent,
-    ListServidoresComponent,
-    CreateServidorComponent,
-    EditServidorComponent,
-    SignInComponent,
-    RegisterComponent,
-    ListUsersComponent,
-    UpdateUserComponent,
-    NavbarComponent,
-    ListComponenteComponent,
-    CreateComponenteComponent,
-    UpdateComponenteComponent,
-    ListDatabaseComponent,
-    CreateDatabaseComponent,
-    UpdateDatabaseComponent,
-    ListMetricaComponent,
-    CreateMetricaComponent,
-    UpdateMetricaComponent,
-    UsoCPUComponent,
-    UsoMemoriaComponent,
-    TransaccionesBaseComponent,
-    ComparacionServidoresComponent
-  ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    HttpClientModule,
-    ReactiveFormsModule,
-    FormsModule,
-    BrowserAnimationsModule,
-    MatToolbarModule,
-    MatButtonModule,
-    MatMenuModule,
-    MatPaginatorModule,
-    KeycloakAngularModule
-  ],
-  providers: [
-  {
-    provide: APP_INITIALIZER,
-    useFactory: initializeKeycloak,
-    multi: true,
-    deps: [KeycloakService]
-  },
-  {
-    provide: HTTP_INTERCEPTORS,
-    useClass: AuthInterceptor,
-    multi: true
-  }],
-  bootstrap: [AppComponent]
-})
+@NgModule({ declarations: [
+        AppComponent,
+        ListServidoresComponent,
+        CreateServidorComponent,
+        EditServidorComponent,
+        SignInComponent,
+        RegisterComponent,
+        ListUsersComponent,
+        UpdateUserComponent,
+        NavbarComponent,
+        ListComponenteComponent,
+        CreateComponenteComponent,
+        UpdateComponenteComponent,
+        ListDatabaseComponent,
+        CreateDatabaseComponent,
+        UpdateDatabaseComponent,
+        ListMetricaComponent,
+        CreateMetricaComponent,
+        UpdateMetricaComponent,
+        UsoCPUComponent,
+        UsoMemoriaComponent,
+        TransaccionesBaseComponent,
+        ComparacionServidoresComponent
+    ],
+    bootstrap: [AppComponent], imports: [BrowserModule,
+        AppRoutingModule,
+        ReactiveFormsModule,
+        FormsModule,
+        BrowserAnimationsModule,
+        MatToolbarModule,
+        MatButtonModule,
+        MatMenuModule,
+        MatPaginatorModule,
+        KeycloakAngularModule], providers: [
+        {
+            provide: APP_INITIALIZER,
+            useFactory: initializeKeycloak,
+            multi: true,
+            deps: [KeycloakService]
+        },
+        {
+            provide: HTTP_INTERCEPTORS,
+            useClass: AuthInterceptor,
+            multi: true
+        },
+        provideHttpClient(withInterceptorsFromDi())
+    ] })
 export class AppModule { }
